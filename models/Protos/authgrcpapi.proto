@@ -1,0 +1,60 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "WokflowLib.Authentication.Models.Protos";
+
+package DeliveryFiles;
+
+service AuthGrpcApi {
+  rpc CheckUserExistance (UserCredentials) returns (UserExistance);
+  rpc AddUser (UserCredentials) returns (SessionToken);
+  rpc GetCodeInfo (TokenInfo) returns (GetCodeInfoResponse);
+  rpc VerifyUserCredentials (UserCredentials) returns (UserUidResponse);
+  rpc GetTokenByUserUid (UserUidRequest) returns (SessionToken);
+}
+
+message UserCredentials {
+  string Login = 1;
+  string Email = 2;
+  string PhoneNumber = 3;
+  string Password = 4;
+}
+
+message UserExistance {
+  bool LoginExists = 1;
+  bool EmailExists = 2;
+  bool PhoneNumberExists = 3;
+  bool ExceptionMessage = 4;
+}
+
+message SessionToken {
+  string TokenGuid = 1;
+  google.protobuf.Timestamp TokenBeginDt = 2;
+  google.protobuf.Timestamp TokenEndDt = 3;
+  string VerificationCode = 4;
+  google.protobuf.Timestamp CodeSendingDt = 5;
+  string ExceptionMessage = 6;
+}
+
+message TokenInfo {
+  string TokenGuid = 1;
+  int32 TriesNumber = 2;
+  bool IsDeprecated = 3;
+  bool IsOverriden = 4;
+  string SignUpClosingCode = 5;
+}
+
+message GetCodeInfoResponse {
+  bool IsSuccessful = 1;
+  string ExceptionMessage = 2;
+}
+
+message UserUidResponse {
+  bool IsVerified = 1; 
+  string UserUid = 2; 
+  string ExceptionMessage = 3;
+}
+
+message UserUidRequest {
+  string UserUid = 1;
+}

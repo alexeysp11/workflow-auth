@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../authbl/DeliveryService.Authentication.AuthBL.csproj" />
-    <ProjectReference Include="../../models/DeliveryService.Models.csproj" />
+    <ProjectReference Include="../authbl/WokflowLib.Authentication.AuthBL.csproj" />
+    <ProjectReference Include="../models/WokflowLib.Authentication.Models.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,12 @@
 using Grpc.Core;
 using Google.Protobuf.WellKnownTypes;
-using DeliveryService.Authentication.AuthBL;
-using DeliveryService.Authentication.AuthGrpcApi;
-using DeliveryService.Models.Protos;
+using WokflowLib.Authentication.AuthBL;
+using WokflowLib.Authentication.AuthGrpcApi;
+using WokflowLib.Authentication.Models.Protos;
 
-namespace DeliveryService.Authentication.AuthGrpcApi.Services;
+namespace WokflowLib.Authentication.AuthGrpcApi.Services;
 
-public class AuthGrpcApiService : DeliveryService.Models.Protos.AuthGrpcApi.AuthGrpcApiBase
+public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGrpcApi.AuthGrpcApiBase
 {
     private readonly ILogger<AuthGrpcApiService> _logger;
     public AuthGrpcApiService(ILogger<AuthGrpcApiService> logger)
@@ -15,30 +15,68 @@ public class AuthGrpcApiService : DeliveryService.Models.Protos.AuthGrpcApi.Auth
     }
 
     /// <summary>
-    /// Creates unique token
+    /// 
     /// </summary>
-    public override Task<SessionTokenInfo> CreateToken(Empty request, ServerCallContext context)
+    public override Task<UserExistance> CheckUserExistance(UserCredentials request, ServerCallContext context)
     {
-        var token = new TokenHelper().CreateToken();
-        return Task.FromResult(new SessionTokenInfo
+        return Task.FromResult(new UserExistance
         {
-            SessionTokenGuid = token.SessionTokenGuid.ToString(),
-            TokenActivityBegin = Timestamp.FromDateTimeOffset(token.TokenActivityBegin),
-            TokenActivityEnd = Timestamp.FromDateTimeOffset(token.TokenActivityEnd)
+            LoginExists = true,
+            EmailExists = true,
+            PhoneNumberExists = true
         });
     }
 
     /// <summary>
-    /// Check if the specified token exists in the database
+    /// 
     /// </summary>
-    public override Task<SessionTokenInfo> GetTokenByGuid(TokenRequest request, ServerCallContext context)
+    public override Task<SessionToken> AddUser(UserCredentials request, ServerCallContext context)
     {
-        var token = new TokenHelper().GetTokenByGuid(new System.Guid(request.SessionTokenGuid));
-        return Task.FromResult(new SessionTokenInfo
+        return Task.FromResult(new SessionToken
         {
-            SessionTokenGuid = request.SessionTokenGuid,
-            TokenActivityBegin = Timestamp.FromDateTimeOffset(token.TokenActivityBegin),
-            TokenActivityEnd = Timestamp.FromDateTimeOffset(token.TokenActivityEnd)
+            TokenGuid = "",
+            TokenBeginDt = Timestamp.FromDateTimeOffset(System.DateTime.Now),
+            TokenEndDt = Timestamp.FromDateTimeOffset(System.DateTime.Now),
+            VerificationCode = "",
+            CodeSendingDt = Timestamp.FromDateTimeOffset(System.DateTime.Now)
+        });
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public override Task<GetCodeInfoResponse> GetCodeInfo(TokenInfo request, ServerCallContext context)
+    {
+        return Task.FromResult(new GetCodeInfoResponse
+        {
+            IsSuccessful = true
+        });
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public override Task<UserUidResponse> VerifyUserCredentials(UserCredentials request, ServerCallContext context)
+    {
+        return Task.FromResult(new UserUidResponse
+        {
+            IsVerified = true,
+            UserUid = ""
+        });
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public override Task<SessionToken> GetTokenByUserUid(UserUidRequest request, ServerCallContext context)
+    {
+        return Task.FromResult(new SessionToken
+        {
+            TokenGuid = "",
+            TokenBeginDt = Timestamp.FromDateTimeOffset(System.DateTime.Now),
+            TokenEndDt = Timestamp.FromDateTimeOffset(System.DateTime.Now),
+            VerificationCode = "",
+            CodeSendingDt = Timestamp.FromDateTimeOffset(System.DateTime.Now)
         });
     }
 }

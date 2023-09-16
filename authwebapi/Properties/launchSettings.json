@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "DeliveryService.Authentication.AuthWebApi": {
+    "WokflowLib.Authentication.AuthWebApi": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

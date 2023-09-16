@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "DeliveryService.Authentication.AuthGrpcApi": {
+    "WokflowLib.Authentication.AuthGrpcApi": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,

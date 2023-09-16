@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../../models/DeliveryService.Models.csproj" />
-    <ProjectReference Include="../../../workflow-lib/src/Cims.WorkflowLib.csproj" />
-  </ItemGroup>
-
 </Project>

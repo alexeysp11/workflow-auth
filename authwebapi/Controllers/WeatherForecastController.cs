@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace DeliveryService.Authentication.AuthWebApi.Controllers;
+namespace WokflowLib.Authentication.AuthWebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]

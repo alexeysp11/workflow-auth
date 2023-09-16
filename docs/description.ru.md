@@ -70,46 +70,46 @@
 
 - **Verify user credentials** - (наименование: `VerifyUserCredentials`)
     - input: `UserCredentials`;
-    - output: `UserIdResponse`.
-- **Get token by user ID** - (наименование: `GetTokenByUserId`)
-    - input: `UserIdRequest`; 
+    - output: `UserUidResponse`.
+- **Get token by user ID** - (наименование: `GetTokenByUserUid`)
+    - input: `UserUidRequest`; 
     - output: `SessionToken`.
 
 ### Объекты в C# 
 
 - **User credentials** - пользовательские данные (наименование: `UserCredentials`): 
-    - `login: string`, 
-    - `email: string`, 
-    - `phoneNumber: string`, 
-    - `password: string`.
+    - `Login: string`, 
+    - `Email: string`, 
+    - `PhoneNumber: string`, 
+    - `Password: string`.
 - **User existance** - объект наличия пользователя по введенным данным (наименование: `UserExistance`): 
-    - `loginExists: bool`, 
-    - `emailExists: bool`, 
-    - `phoneNumberExists: bool`, 
-    - `exceptionMessage: string`.
+    - `LoginExists: bool`, 
+    - `EmailExists: bool`, 
+    - `PhoneNumberExists: bool`, 
+    - `ExceptionMessage: string`.
 - **Session token** - сессионный токен (наименование: `SessionToken`):
-    - `tokenGuid: string`, 
-    - `tokenBeginDt: DateTime`,
-    - `tokenEndDt: DateTime`,
-    - `verificationCode: string`, 
-    - `codeSendingDt: DateTime`, 
+    - `TokenGuid: string`, 
+    - `TokenBeginDt: DateTime`,
+    - `TokenEndDt: DateTime`,
+    - `VerificationCode: string`, 
+    - `CodeSendingDt: DateTime`, 
     - overriden tokens,
-    - `exceptionMessage: string`.
+    - `ExceptionMessage: string`.
 - **Token info** - (наименование: `TokenInfo`): 
-    - `tokenGuid: string`, 
-    - `triesNumber: int`, 
-    - `isDeprecated: bool`, 
-    - `isOverriden: bool`, 
-    - `signUpClosingCode: string`.
+    - `TokenGuid: string`, 
+    - `TriesNumber: int`, 
+    - `IsDeprecated: bool`, 
+    - `IsOverriden: bool`, 
+    - `SignUpClosingCode: string`.
 - **Get code info response** - (наименование: `GetCodeInfoResponse`):
-    - `isSuccessful: bool`, 
-    - `exceptionMessage: string`.
-- **User ID response** - (наименование: `UserIdResponse`):
-    - `isVerified: bool`, 
-    - `userId: int`, 
-    - `exceptionMessage: string`.
-- **User ID request** - (наименование: `UserIdRequest`):
-    - `userId: int`.
+    - `IsSuccessful: bool`, 
+    - `ExceptionMessage: string`.
+- **User ID response** - (наименование: `UserUidResponse`):
+    - `IsVerified: bool`, 
+    - `UserUid: string`, 
+    - `ExceptionMessage: string`.
+- **User ID request** - (наименование: `UserUidRequest`):
+    - `UserUid: string`.
 
 ## Объекты и таблицы в БД 
 

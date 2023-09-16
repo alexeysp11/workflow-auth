@@ -1,5 +1,5 @@
-using DeliveryService.Authentication.AuthGrpcApi.Services;
-using DeliveryService.Models.Protos;
+using WokflowLib.Authentication.AuthGrpcApi.Services;
+using WokflowLib.Authentication.Models.Protos;
 
 var builder = WebApplication.CreateBuilder(args);
 

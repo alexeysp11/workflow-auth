@@ -1,4 +1,4 @@
-namespace DeliveryService.Authentication.AuthWebApi;
+namespace WokflowLib.Authentication.AuthWebApi;
 
 public class WeatherForecast
 {
