@@ -68,10 +68,10 @@
 
 ### Методы для входа в приложение
 
-- **Verify user credentials** - (наименование: `VerifyUserCredentials`)
+- **Verify user credentials** - верификация пользователя (наименование: `VerifyUserCredentials`)
     - input: `UserCredentials`;
     - output: `UserUidResponse`.
-- **Get token by user ID** - (наименование: `GetTokenByUserUid`)
+- **Get token by user UID** - обновление сессионного токена по UID пользователя (наименование: `GetTokenByUserUid`)
     - input: `UserUidRequest`; 
     - output: `SessionToken`.
 
@@ -104,11 +104,11 @@
 - **Get code info response** - (наименование: `GetCodeInfoResponse`):
     - `IsSuccessful: bool`, 
     - `ExceptionMessage: string`.
-- **User ID response** - (наименование: `UserUidResponse`):
+- **User UID response** - (наименование: `UserUidResponse`):
     - `IsVerified: bool`, 
     - `UserUid: string`, 
     - `ExceptionMessage: string`.
-- **User ID request** - (наименование: `UserUidRequest`):
+- **User UID request** - (наименование: `UserUidRequest`):
     - `UserUid: string`.
 
 ## Объекты и таблицы в БД 
