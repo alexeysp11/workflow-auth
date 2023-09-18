@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using Cims.WorkflowLib.DbConnections;
 using WokflowLib.Authentication.Models;
+using WokflowLib.Authentication.Models.NetworkParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
@@ -20,23 +21,21 @@ public class TokenHelper
     /// <summary>
     /// 
     /// </summary>
-    public void CreateToken()
+    public void CreateToken(SessionToken response)
     {
-        // Assign all the necessary parameters
-        var guid = System.Guid.NewGuid(); 
-        var dt1 = System.DateTime.Now;
-        var dt2 = dt1.AddHours(HoursToAdd);
-        // Add or modify guid in the database
-//         PgDbConnection.ExecuteSqlCommand(@$"
-// insert into public.deliveryservice_auth_token(session_token_guid,begin_datetime,end_datetime)
-// values ('{guid}','{dt1}','{dt2}');");
-//         // 
-//         return new SessionTokenInfo
-//         {
-//             SessionTokenGuid = guid,
-//             TokenActivityBegin = dt1,
-//             TokenActivityEnd = dt2
-//         }; 
+        try
+        {
+            response.TokenGuid = System.Guid.NewGuid().ToString();
+            response.TokenBeginDt = System.DateTime.Now;
+            response.TokenEndDt = response.TokenBeginDt.AddHours(HoursToAdd);
+            PgDbConnection.ExecuteSqlCommand(@$"-- 
+    insert into public.deliveryservice_auth_token(session_token_guid,begin_datetime,end_datetime)
+    values ('{response.TokenGuid}','{response.TokenBeginDt}','{response.TokenEndDt}');");
+        }
+        catch (System.Exception ex)
+        {
+            response.ExceptionMessage = ex.ToString();
+        }
     }
     /// <summary>
     /// 

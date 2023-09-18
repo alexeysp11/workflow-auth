@@ -53,18 +53,6 @@ select 2 as credentials_type, count(*) as qty from users where phone_number = {r
             string sql = @$"insert into users (login, email, phone_number) values ({request.Login}, {request.Email}, {request.PhoneNumber});";
             // Execute SQL statement 
             // 
-            // Generate session token
-            response.TokenGuid = "";
-            response.TokenBeginDt = System.DateTime.Now;
-            response.TokenEndDt = System.DateTime.Now;
-            sql = @$"insert into session_token (guid, begin_dt, end_dt) values ({response.TokenGuid}, {response.TokenBeginDt}, {response.TokenEndDt});";
-            // Execute SQL statement 
-            // 
-            // Generate verification code 
-            response.VerificationCode = "";
-            response.CodeSendingDt = System.DateTime.Now;
-            // Execute SQL statement 
-            // 
         }
         catch (System.Exception ex)
         {

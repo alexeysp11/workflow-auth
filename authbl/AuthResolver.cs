@@ -15,6 +15,7 @@ public class AuthResolver
                 throw new System.Exception("Parameter 'Email' could not be null or empty");
             if (string.IsNullOrWhiteSpace(request.PhoneNumber))
                 throw new System.Exception("Parameter 'PhoneNumber' could not be null or empty"); 
+            // 
             new UserHelper().CheckUserExistance(request, response);
         }
         catch (System.Exception ex)
@@ -37,7 +38,10 @@ public class AuthResolver
                 response.ExceptionMessage = "Parameter 'PhoneNumber' could not be null or empty";
             if (string.IsNullOrWhiteSpace(request.Password))
                 response.ExceptionMessage = "Parameter 'Password' could not be null or empty";
+            // 
             new UserHelper().AddUser(request, response);
+            new TokenHelper().CreateToken(response);
+            new VerificationCodeResolver().GenerateVerificationCode(response);
         }
         catch (System.Exception ex)
         {
