@@ -7,8 +7,8 @@ namespace WokflowLib.Authentication.AuthBL;
 public class TokenHelper
 {
     private PgDbConnection PgDbConnection { get; }
-    private int HoursToAdd { get; }
     private string ConnectionString { get; }
+    private int HoursToAdd { get; }
 
     public TokenHelper()
     {

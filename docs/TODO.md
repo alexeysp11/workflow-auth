@@ -9,4 +9,5 @@
         - Type: SQLite, PostgreSQL, MySQL, MS SQL.
         - SQL, EntityFramework.
         - Connection string.
+- Add  into config file.
 - When a user gets session token, there's a potential threat that an attacker could generate user UID and get session their token.

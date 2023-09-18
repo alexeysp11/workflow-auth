@@ -6,63 +6,92 @@ public class AuthResolver
 {
     public UserExistance CheckUserExistance(UserCredentials request)
     {
-        // Execute SQL query to get if a user with specified credentials exists in the DB 
-        //
-        return new UserExistance()
+        var response = new UserExistance();
+        try
         {
-            LoginExists = true,
-            EmailExists = true,
-            PhoneNumberExists = true
-        };
+            if (string.IsNullOrWhiteSpace(request.Login))
+                throw new System.Exception("Parameter 'Login' could not be null or empty");
+            if (string.IsNullOrWhiteSpace(request.Email))
+                throw new System.Exception("Parameter 'Email' could not be null or empty");
+            if (string.IsNullOrWhiteSpace(request.PhoneNumber))
+                throw new System.Exception("Parameter 'PhoneNumber' could not be null or empty"); 
+            new UserHelper().CheckUserExistance(request, response);
+        }
+        catch (System.Exception ex)
+        {
+            response.ExceptionMessage = ex.ToString();
+        }
+        return response;
     }
 
     public SessionToken AddUser(UserCredentials request)
     {
-        // Execute SQL query to add the user with specified qredentials to the DB 
-        //   
-        return new SessionToken()
+        var response = new SessionToken();
+        try
         {
-            TokenGuid = "",
-            TokenBeginDt = System.DateTime.Now,
-            TokenEndDt = System.DateTime.Now,
-            VerificationCode = "",
-            CodeSendingDt = System.DateTime.Now
-        };
+            if (string.IsNullOrWhiteSpace(request.Login))
+                response.ExceptionMessage = "Parameter 'Login' could not be null or empty";
+            if (string.IsNullOrWhiteSpace(request.Email))
+                response.ExceptionMessage = "Parameter 'Email' could not be null or empty";
+            if (string.IsNullOrWhiteSpace(request.PhoneNumber))
+                response.ExceptionMessage = "Parameter 'PhoneNumber' could not be null or empty";
+            if (string.IsNullOrWhiteSpace(request.Password))
+                response.ExceptionMessage = "Parameter 'Password' could not be null or empty";
+            new UserHelper().AddUser(request, response);
+        }
+        catch (System.Exception ex)
+        {
+            response.ExceptionMessage = ex.ToString();
+        }
+        return response;
     }
 
     public GetCodeInfoResponse GetCodeInfo(TokenInfo request)
     {
-        // Decide if the verification was successful based on the token info from reuqest 
-        // Notify other services, that are specified in a config file, about the status of token (verified, not verified)
-        // 
-        return new GetCodeInfoResponse()
+        var response = new GetCodeInfoResponse();
+        try
         {
-            IsSuccessful = true
-        };
+            // Decide if the verification was successful based on the token info from request 
+            // Notify other services, that are specified in a config file, about the status of token (verified, not verified)
+            // 
+            response.IsSuccessful = true;
+        }
+        catch (System.Exception ex)
+        {
+            response.ExceptionMessage = ex.ToString();
+        }
+        return response;
     }
 
     public UserUidResponse VerifyUserCredentials(UserCredentials request)
     {
-        // Executes SQL query to get user credentials are correct
-        // 
-        return new UserUidResponse()
+        var response = new UserUidResponse();
+        try
         {
-            IsVerified = true,
-            UserUid = ""
-        };
+            // Executes SQL query to get user credentials are correct
+            // 
+            response.IsVerified = true;
+            response.UserUid = "";
+        }
+        catch (System.Exception ex)
+        {
+            response.ExceptionMessage = ex.ToString();
+        }
+        return response;
     }
 
     public SessionToken GetTokenByUserUid(UserUidRequest request)
     {
-        // Update session token for the specified user 
-        //
-        return new SessionToken()
+        var response = new SessionToken();
+        try
         {
-            TokenGuid = "",
-            TokenBeginDt = System.DateTime.Now,
-            TokenEndDt = System.DateTime.Now,
-            VerificationCode = "",
-            CodeSendingDt = System.DateTime.Now
-        };
+            // Update session token for the specified user 
+            //
+        }
+        catch (System.Exception ex)
+        {
+            response.ExceptionMessage = ex.ToString();
+        }
+        return response;
     }
 }
