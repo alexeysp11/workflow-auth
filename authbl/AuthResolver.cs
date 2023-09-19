@@ -31,13 +31,13 @@ public class AuthResolver
         try
         {
             if (string.IsNullOrWhiteSpace(request.Login))
-                response.ExceptionMessage = "Parameter 'Login' could not be null or empty";
+                throw new System.Exception("Parameter 'Login' could not be null or empty");
             if (string.IsNullOrWhiteSpace(request.Email))
-                response.ExceptionMessage = "Parameter 'Email' could not be null or empty";
+                throw new System.Exception("Parameter 'Email' could not be null or empty");
             if (string.IsNullOrWhiteSpace(request.PhoneNumber))
-                response.ExceptionMessage = "Parameter 'PhoneNumber' could not be null or empty";
+                throw new System.Exception("Parameter 'PhoneNumber' could not be null or empty");
             if (string.IsNullOrWhiteSpace(request.Password))
-                response.ExceptionMessage = "Parameter 'Password' could not be null or empty";
+                throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
             new UserHelper().AddUser(request, response);
             new TokenHelper().CreateToken(response);
@@ -72,10 +72,12 @@ public class AuthResolver
         var response = new UserUidResponse();
         try
         {
-            // Executes SQL query to get user credentials are correct
+            if (string.IsNullOrWhiteSpace(request.Login))
+                throw new System.Exception("Parameter 'Login' could not be null or empty");
+            if (string.IsNullOrWhiteSpace(request.Password))
+                throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
-            response.IsVerified = true;
-            response.UserUid = "";
+            new UserHelper().VerifyUserCredentials(request, response);
         }
         catch (System.Exception ex)
         {
@@ -89,8 +91,10 @@ public class AuthResolver
         var response = new SessionToken();
         try
         {
+            if (string.IsNullOrWhiteSpace(request.UserUid))
+                throw new System.Exception("Parameter 'UserUid' could not be null or empty");
             // Update session token for the specified user 
-            //
+            // 
         }
         catch (System.Exception ex)
         {

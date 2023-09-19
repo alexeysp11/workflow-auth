@@ -40,7 +40,7 @@ public class TokenHelper
     /// <summary>
     /// 
     /// </summary>
-    public void GetTokenByGuid(System.Guid guid)
+    public void GetTokenByGuid(System.Guid guid, )
     {
 //         var dataTable = PgDbConnection.ExecuteSqlCommand(@$"
 // select

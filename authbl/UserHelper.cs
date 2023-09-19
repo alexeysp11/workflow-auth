@@ -50,9 +50,29 @@ select 2 as credentials_type, count(*) as qty from users where phone_number = {r
         try
         {
             // Add new user to the DB
-            string sql = @$"insert into users (login, email, phone_number) values ({request.Login}, {request.Email}, {request.PhoneNumber});";
+            string sql = @$"insert into users (login, email, phone_number, password) values ({request.Login}, {request.Email}, {request.PhoneNumber}, {request.Password});";
             // Execute SQL statement 
             // 
+        }
+        catch (System.Exception ex)
+        {
+            response.ExceptionMessage = ex.ToString();
+        }
+    }
+
+    /// <summary>
+    /// Gets if user credentials are correct
+    /// </summary>
+    public void VerifyUserCredentials(UserCredentials request, UserUidResponse response)
+    {
+        try
+        {
+            // Get quantity of the users with specified login and password
+            string sql = @$"select u.uid qty from users u where u.login = {request.Login} and u.password = {request.Password};";
+            // Executes SQL query to get user credentials are correct
+            // 
+            response.IsVerified = true;
+            response.UserUid = "";
         }
         catch (System.Exception ex)
         {
