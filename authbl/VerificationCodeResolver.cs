@@ -10,7 +10,7 @@ public class VerificationCodeResolver
     /// <summary>
     /// 
     /// </summary>
-    public void GenerateVerificationCode(SessionToken response)
+    public void GenerateVerificationCode(UserCreationResult response)
     {
         try
         {

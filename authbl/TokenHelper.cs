@@ -40,7 +40,7 @@ public class TokenHelper
     /// <summary>
     /// 
     /// </summary>
-    public void GetTokenByGuid(System.Guid guid, )
+    public void GetTokenByGuid(System.Guid guid)
     {
 //         var dataTable = PgDbConnection.ExecuteSqlCommand(@$"
 // select
@@ -54,7 +54,7 @@ public class TokenHelper
         // for example, the number of rows is correct if only one record was returned
         // var dt1 = (System.DateTime)dataTable.Rows[0][2];
         // var dt2 = (System.DateTime)dataTable.Rows[0][3];
-        // return new SessionTokenInfo
+        // return new SessionVerifySignUpRequest
         // {
         //     SessionTokenGuid = guid,
         //     TokenActivityBegin = dt1,

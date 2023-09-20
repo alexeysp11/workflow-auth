@@ -45,7 +45,7 @@ select 2 as credentials_type, count(*) as qty from users where phone_number = {r
     /// <summary>
     /// Execute SQL query to add the user with specified qredentials to the DB 
     /// </summary>
-    public void AddUser(UserCredentials request, SessionToken response)
+    public void AddUser(UserCredentials request, UserCreationResult response)
     {
         try
         {
@@ -63,7 +63,7 @@ select 2 as credentials_type, count(*) as qty from users where phone_number = {r
     /// <summary>
     /// Gets if user credentials are correct
     /// </summary>
-    public void VerifyUserCredentials(UserCredentials request, UserUidResponse response)
+    public void VerifyUserCredentials(UserCredentials request, VUCResponse response)
     {
         try
         {

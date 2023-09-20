@@ -1,8 +1,8 @@
 namespace WokflowLib.Authentication.Models.NetworkParameters;
 
-public class TokenInfo
+public class VerifySignUpRequest
 {
-    public string? TokenGuid { get; set; }
+    public string? UserGuid { get; set; }
     public int TriesNumber { get; set; }
     public bool IsDeprecated { get; set; }
     public bool IsOverriden { get; set; }

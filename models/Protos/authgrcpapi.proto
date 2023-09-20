@@ -7,10 +7,10 @@ package DeliveryFiles;
 
 service AuthGrpcApi {
   rpc CheckUserExistance (UserCredentials) returns (UserExistance);
-  rpc AddUser (UserCredentials) returns (SessionToken);
-  rpc GetCodeInfo (TokenInfo) returns (GetCodeInfoResponse);
-  rpc VerifyUserCredentials (UserCredentials) returns (UserUidResponse);
-  rpc GetTokenByUserUid (UserUidRequest) returns (SessionToken);
+  rpc AddUser (UserCredentials) returns (UserCreationResult);
+  rpc VerifySignUp (VerifySignUpRequest) returns (VerifySignUpResponse);
+  rpc VerifyUserCredentials (UserCredentials) returns (VUCResponse);
+  rpc GetTokenByUserUid (TokenRequest) returns (SessionToken);
 }
 
 message UserCredentials {
@@ -27,34 +27,40 @@ message UserExistance {
   bool ExceptionMessage = 4;
 }
 
+message UserCreationResult {
+  bool IsUserAdded = 1;
+  string SignUpGuid = 2;
+  string VerificationCode = 3;
+  google.protobuf.Timestamp CodeSendingDt = 4;
+  string ExceptionMessage = 5;
+}
+
 message SessionToken {
   string TokenGuid = 1;
   google.protobuf.Timestamp TokenBeginDt = 2;
   google.protobuf.Timestamp TokenEndDt = 3;
-  string VerificationCode = 4;
-  google.protobuf.Timestamp CodeSendingDt = 5;
-  string ExceptionMessage = 6;
+  string ExceptionMessage = 4;
 }
 
-message TokenInfo {
-  string TokenGuid = 1;
+message VerifySignUpRequest {
+  string UserGuid = 1;
   int32 TriesNumber = 2;
   bool IsDeprecated = 3;
   bool IsOverriden = 4;
   string SignUpClosingCode = 5;
 }
 
-message GetCodeInfoResponse {
+message VerifySignUpResponse {
   bool IsSuccessful = 1;
   string ExceptionMessage = 2;
 }
 
-message UserUidResponse {
+message VUCResponse {
   bool IsVerified = 1; 
   string UserUid = 2; 
   string ExceptionMessage = 3;
 }
 
-message UserUidRequest {
+message TokenRequest {
   string UserUid = 1;
 }

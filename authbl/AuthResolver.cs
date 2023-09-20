@@ -25,9 +25,9 @@ public class AuthResolver
         return response;
     }
 
-    public SessionToken AddUser(UserCredentials request)
+    public UserCreationResult AddUser(UserCredentials request)
     {
-        var response = new SessionToken();
+        var response = new UserCreationResult();
         try
         {
             if (string.IsNullOrWhiteSpace(request.Login))
@@ -40,7 +40,6 @@ public class AuthResolver
                 throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
             new UserHelper().AddUser(request, response);
-            new TokenHelper().CreateToken(response);
             new VerificationCodeResolver().GenerateVerificationCode(response);
         }
         catch (System.Exception ex)
@@ -50,9 +49,9 @@ public class AuthResolver
         return response;
     }
 
-    public GetCodeInfoResponse GetCodeInfo(TokenInfo request)
+    public VerifySignUpResponse VerifySignUp(VerifySignUpRequest request)
     {
-        var response = new GetCodeInfoResponse();
+        var response = new VerifySignUpResponse();
         try
         {
             // Decide if the verification was successful based on the token info from request 
@@ -67,9 +66,9 @@ public class AuthResolver
         return response;
     }
 
-    public UserUidResponse VerifyUserCredentials(UserCredentials request)
+    public VUCResponse VerifyUserCredentials(UserCredentials request)
     {
-        var response = new UserUidResponse();
+        var response = new VUCResponse();
         try
         {
             if (string.IsNullOrWhiteSpace(request.Login))
@@ -86,7 +85,7 @@ public class AuthResolver
         return response;
     }
 
-    public SessionToken GetTokenByUserUid(UserUidRequest request)
+    public SessionToken GetTokenByUserUid(TokenRequest request)
     {
         var response = new SessionToken();
         try

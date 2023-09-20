@@ -1,6 +1,9 @@
 namespace WokflowLib.Authentication.Models.NetworkParameters;
 
-public class UserUidResponse
+/// <summary>
+/// Verify user credentials response 
+/// </summary>
+public class VUCResponse
 {
     public bool IsVerified { get; set; }
     public string? UserUid { get; set; }

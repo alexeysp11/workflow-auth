@@ -4,8 +4,8 @@ using WokflowLib.Authentication.AuthBL;
 using WokflowLib.Authentication.AuthGrpcApi;
 using WokflowLib.Authentication.Models.Protos;
 using UserCredentialsCommon = WokflowLib.Authentication.Models.NetworkParameters.UserCredentials;
-using TokenInfoCommon = WokflowLib.Authentication.Models.NetworkParameters.TokenInfo;
-using UserUidRequestCommon = WokflowLib.Authentication.Models.NetworkParameters.UserUidRequest;
+using VerifySignUpRequestCommon = WokflowLib.Authentication.Models.NetworkParameters.VerifySignUpRequest;
+using TokenRequestCommon = WokflowLib.Authentication.Models.NetworkParameters.TokenRequest;
 
 namespace WokflowLib.Authentication.AuthGrpcApi.Services;
 
@@ -40,7 +40,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     /// <summary>
     /// 
     /// </summary>
-    public override Task<SessionToken> AddUser(UserCredentials request, ServerCallContext context)
+    public override Task<UserCreationResult> AddUser(UserCredentials request, ServerCallContext context)
     {
         var response = new AuthResolver().AddUser(new UserCredentialsCommon
         {
@@ -49,11 +49,10 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
             PhoneNumber = request.PhoneNumber,
             Password = request.Password
         });
-        return Task.FromResult(new SessionToken
+        return Task.FromResult(new UserCreationResult
         {
-            TokenGuid = response.TokenGuid,
-            TokenBeginDt = Timestamp.FromDateTimeOffset(response.TokenBeginDt),
-            TokenEndDt = Timestamp.FromDateTimeOffset(response.TokenEndDt),
+            IsUserAdded = true,
+            SignUpGuid = "",
             VerificationCode = response.VerificationCode,
             CodeSendingDt = Timestamp.FromDateTimeOffset(response.CodeSendingDt)
         });
@@ -62,17 +61,17 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     /// <summary>
     /// 
     /// </summary>
-    public override Task<GetCodeInfoResponse> GetCodeInfo(TokenInfo request, ServerCallContext context)
+    public override Task<VerifySignUpResponse> VerifySignUp(VerifySignUpRequest request, ServerCallContext context)
     {
-        var response = new AuthResolver().GetCodeInfo(new TokenInfoCommon
+        var response = new AuthResolver().VerifySignUp(new VerifySignUpRequestCommon
         {
-            TokenGuid = request.TokenGuid,
+            UserGuid = request.UserGuid,
             TriesNumber = request.TriesNumber,
             IsDeprecated = request.IsDeprecated,
             IsOverriden = request.IsOverriden,
             SignUpClosingCode = request.SignUpClosingCode
         });
-        return Task.FromResult(new GetCodeInfoResponse
+        return Task.FromResult(new VerifySignUpResponse
         {
             IsSuccessful = response.IsSuccessful
         });
@@ -81,7 +80,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     /// <summary>
     /// 
     /// </summary>
-    public override Task<UserUidResponse> VerifyUserCredentials(UserCredentials request, ServerCallContext context)
+    public override Task<VUCResponse> VerifyUserCredentials(UserCredentials request, ServerCallContext context)
     {
         var response = new AuthResolver().VerifyUserCredentials(new UserCredentialsCommon
         {
@@ -90,7 +89,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
             PhoneNumber = request.PhoneNumber,
             Password = request.Password
         });
-        return Task.FromResult(new UserUidResponse
+        return Task.FromResult(new VUCResponse
         {
             IsVerified = response.IsVerified,
             UserUid = response.UserUid
@@ -100,9 +99,9 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     /// <summary>
     /// 
     /// </summary>
-    public override Task<SessionToken> GetTokenByUserUid(UserUidRequest request, ServerCallContext context)
+    public override Task<SessionToken> GetTokenByUserUid(TokenRequest request, ServerCallContext context)
     {
-        var response = new AuthResolver().GetTokenByUserUid(new UserUidRequestCommon
+        var response = new AuthResolver().GetTokenByUserUid(new TokenRequestCommon
         {
             UserUid = request.UserUid
         });
@@ -110,9 +109,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
         {
             TokenGuid = response.TokenGuid,
             TokenBeginDt = Timestamp.FromDateTimeOffset(response.TokenBeginDt),
-            TokenEndDt = Timestamp.FromDateTimeOffset(response.TokenEndDt),
-            VerificationCode = response.VerificationCode,
-            CodeSendingDt = Timestamp.FromDateTimeOffset(response.CodeSendingDt)
+            TokenEndDt = Timestamp.FromDateTimeOffset(response.TokenEndDt)
         });
     }
 }

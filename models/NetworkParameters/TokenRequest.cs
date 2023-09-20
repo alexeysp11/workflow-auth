@@ -1,6 +1,6 @@
 namespace WokflowLib.Authentication.Models.NetworkParameters;
 
-public class UserUidRequest
+public class TokenRequest
 {
     public string? UserUid { get; set; }
 }

@@ -20,22 +20,22 @@ public class AuthWebApiController : ControllerBase
         return new AuthResolver().CheckUserExistance(request);
     }
 
-    public SessionToken AddUser(UserCredentials request)
+    public UserCreationResult AddUser(UserCredentials request)
     {
         return new AuthResolver().AddUser(request);
     }
 
-    public GetCodeInfoResponse GetCodeInfo(TokenInfo request)
+    public VerifySignUpResponse VerifySignUp(VerifySignUpRequest request)
     {
-        return new AuthResolver().GetCodeInfo(request);
+        return new AuthResolver().VerifySignUp(request);
     }
 
-    public UserUidResponse VerifyUserCredentials(UserCredentials request)
+    public VUCResponse VerifyUserCredentials(UserCredentials request)
     {
         return new AuthResolver().VerifyUserCredentials(request);
     }
 
-    public SessionToken GetTokenByUserUid(UserUidRequest request)
+    public SessionToken GetTokenByUserUid(TokenRequest request)
     {
         return new AuthResolver().GetTokenByUserUid(request);
     }
