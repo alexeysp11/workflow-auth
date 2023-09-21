@@ -5,12 +5,12 @@ using WokflowLib.Authentication.Models.NetworkParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
-public class UserHelper
+public class UserResolver
 {
     private PgDbConnection PgDbConnection { get; }
     private string ConnectionString { get; }
 
-    public UserHelper()
+    public UserResolver()
     {
         ConnectionString = "Server=127.0.0.1;Port=5432;Userid=postgres;Password=postgres;Database=postgres";
         PgDbConnection = new PgDbConnection(ConnectionString);

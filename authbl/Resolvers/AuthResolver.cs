@@ -1,22 +1,30 @@
+using WokflowLib.Authentication.Models.ConfigParameters;
 using WokflowLib.Authentication.Models.NetworkParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
 public class AuthResolver
 {
+    private CheckUCConfig CheckUCConfig { get; set; }
+
+    public AuthResolver()
+    {
+        CheckUCConfig = ConfigHelper.GetUCConfigs();
+    }
+
     public UserExistance CheckUserExistance(UserCredentials request)
     {
         var response = new UserExistance();
         try
         {
-            if (string.IsNullOrWhiteSpace(request.Login))
+            if (CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
                 throw new System.Exception("Parameter 'Login' could not be null or empty");
-            if (string.IsNullOrWhiteSpace(request.Email))
+            if (CheckUCConfig.IsEmailRequired && string.IsNullOrWhiteSpace(request.Email))
                 throw new System.Exception("Parameter 'Email' could not be null or empty");
-            if (string.IsNullOrWhiteSpace(request.PhoneNumber))
+            if (CheckUCConfig.IsPhoneNumberRequired && string.IsNullOrWhiteSpace(request.PhoneNumber))
                 throw new System.Exception("Parameter 'PhoneNumber' could not be null or empty"); 
             // 
-            new UserHelper().CheckUserExistance(request, response);
+            new UserResolver().CheckUserExistance(request, response);
         }
         catch (System.Exception ex)
         {
@@ -30,16 +38,16 @@ public class AuthResolver
         var response = new UserCreationResult();
         try
         {
-            if (string.IsNullOrWhiteSpace(request.Login))
+            if (CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
                 throw new System.Exception("Parameter 'Login' could not be null or empty");
-            if (string.IsNullOrWhiteSpace(request.Email))
+            if (CheckUCConfig.IsEmailRequired && string.IsNullOrWhiteSpace(request.Email))
                 throw new System.Exception("Parameter 'Email' could not be null or empty");
-            if (string.IsNullOrWhiteSpace(request.PhoneNumber))
+            if (CheckUCConfig.IsPhoneNumberRequired && string.IsNullOrWhiteSpace(request.PhoneNumber))
                 throw new System.Exception("Parameter 'PhoneNumber' could not be null or empty");
-            if (string.IsNullOrWhiteSpace(request.Password))
+            if (CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
                 throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
-            new UserHelper().AddUser(request, response);
+            new UserResolver().AddUser(request, response);
             new VerificationCodeResolver().GenerateVerificationCode(response);
         }
         catch (System.Exception ex)
@@ -71,12 +79,12 @@ public class AuthResolver
         var response = new VUCResponse();
         try
         {
-            if (string.IsNullOrWhiteSpace(request.Login))
+            if (CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
                 throw new System.Exception("Parameter 'Login' could not be null or empty");
-            if (string.IsNullOrWhiteSpace(request.Password))
+            if (CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
                 throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
-            new UserHelper().VerifyUserCredentials(request, response);
+            new UserResolver().VerifyUserCredentials(request, response);
         }
         catch (System.Exception ex)
         {
