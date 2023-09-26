@@ -1,6 +1,9 @@
 namespace WokflowLib.Authentication.Models.NetworkParameters;
 
-public class VerifySignUpResponse
+/// <summary>
+/// Virify sign up response
+/// </summary>
+public class VSUResponse
 {
     public bool IsSuccessful { get; set; }
     public string? ExceptionMessage { get; set; }

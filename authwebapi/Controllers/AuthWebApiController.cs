@@ -25,7 +25,7 @@ public class AuthWebApiController : ControllerBase
         return new AuthResolver().AddUser(request);
     }
 
-    public VerifySignUpResponse VerifySignUp(VerifySignUpRequest request)
+    public VSUResponse VerifySignUp(VSURequest request)
     {
         return new AuthResolver().VerifySignUp(request);
     }

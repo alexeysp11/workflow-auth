@@ -4,7 +4,7 @@ using WokflowLib.Authentication.AuthBL;
 using WokflowLib.Authentication.AuthGrpcApi;
 using WokflowLib.Authentication.Models.Protos;
 using UserCredentialsCommon = WokflowLib.Authentication.Models.NetworkParameters.UserCredentials;
-using VerifySignUpRequestCommon = WokflowLib.Authentication.Models.NetworkParameters.VerifySignUpRequest;
+using VSURequestCommon = WokflowLib.Authentication.Models.NetworkParameters.VSURequest;
 using TokenRequestCommon = WokflowLib.Authentication.Models.NetworkParameters.TokenRequest;
 
 namespace WokflowLib.Authentication.AuthGrpcApi.Services;
@@ -61,9 +61,9 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     /// <summary>
     /// 
     /// </summary>
-    public override Task<VerifySignUpResponse> VerifySignUp(VerifySignUpRequest request, ServerCallContext context)
+    public override Task<VSUResponse> VerifySignUp(VSURequest request, ServerCallContext context)
     {
-        var response = new AuthResolver().VerifySignUp(new VerifySignUpRequestCommon
+        var response = new AuthResolver().VerifySignUp(new VSURequestCommon
         {
             UserGuid = request.UserGuid,
             TriesNumber = request.TriesNumber,
@@ -71,7 +71,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
             IsOverriden = request.IsOverriden,
             SignUpClosingCode = request.SignUpClosingCode
         });
-        return Task.FromResult(new VerifySignUpResponse
+        return Task.FromResult(new VSUResponse
         {
             IsSuccessful = response.IsSuccessful
         });

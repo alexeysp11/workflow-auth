@@ -54,7 +54,7 @@ public class TokenResolver
         // for example, the number of rows is correct if only one record was returned
         // var dt1 = (System.DateTime)dataTable.Rows[0][2];
         // var dt2 = (System.DateTime)dataTable.Rows[0][3];
-        // return new SessionVerifySignUpRequest
+        // return new SessionVSURequest
         // {
         //     SessionTokenGuid = guid,
         //     TokenActivityBegin = dt1,

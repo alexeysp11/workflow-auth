@@ -57,9 +57,9 @@ public class AuthResolver
         return response;
     }
 
-    public VerifySignUpResponse VerifySignUp(VerifySignUpRequest request)
+    public VSUResponse VerifySignUp(VSURequest request)
     {
-        var response = new VerifySignUpResponse();
+        var response = new VSUResponse();
         try
         {
             // Decide if the verification was successful based on the token info from request 

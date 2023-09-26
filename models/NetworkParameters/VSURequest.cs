@@ -1,8 +1,11 @@
 namespace WokflowLib.Authentication.Models.NetworkParameters;
 
-public class VerifySignUpRequest
+/// <summary>
+/// Verify sign up request 
+/// </summary>
+public class VSURequest
 {
-    public string? UserGuid { get; set; }
+    public string? SignUpGuid { get; set; }
     public int TriesNumber { get; set; }
     public bool IsDeprecated { get; set; }
     public bool IsOverriden { get; set; }

@@ -8,7 +8,7 @@ package DeliveryFiles;
 service AuthGrpcApi {
   rpc CheckUserExistance (UserCredentials) returns (UserExistance);
   rpc AddUser (UserCredentials) returns (UserCreationResult);
-  rpc VerifySignUp (VerifySignUpRequest) returns (VerifySignUpResponse);
+  rpc VerifySignUp (VSURequest) returns (VSUResponse);
   rpc VerifyUserCredentials (UserCredentials) returns (VUCResponse);
   rpc GetTokenByUserUid (TokenRequest) returns (SessionToken);
 }
@@ -42,15 +42,15 @@ message SessionToken {
   string ExceptionMessage = 4;
 }
 
-message VerifySignUpRequest {
-  string UserGuid = 1;
+message VSURequest {
+  string SignUpGuid = 1;
   int32 TriesNumber = 2;
   bool IsDeprecated = 3;
   bool IsOverriden = 4;
   string SignUpClosingCode = 5;
 }
 
-message VerifySignUpResponse {
+message VSUResponse {
   bool IsSuccessful = 1;
   string ExceptionMessage = 2;
 }
