@@ -12,9 +12,21 @@ Service for authentication and getting session tokens
 - Only the “code check” table is stored on the client application.
 - Any new login to the application updates the expiration date of the session token.
 
-## Examples of using
+## Architecture
+
+![components](docs/img/components.png)
+
+## Technologies
+
+- .NET 6 (C# 10);
+- PostgreSQL;
+- Entity Framework;
+- LINQ;
+- RabbitMQ;
+- WebAPI, gRPC.
+
+## How to use
 
 ## Useful links for developers
 
-- [Application architecture](docs/architecture.md).
 - [Description of the service](docs/description.md).
