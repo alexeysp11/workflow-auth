@@ -2,7 +2,7 @@
 
 Read this in other languages: [English](README.md), [Russian/Русский](README.ru.md).
 
-Service for authentication and getting session tokens 
+`workflow-auth` is a service for authentication and getting session tokens.
 
 ## Description
 
