@@ -12,4 +12,5 @@
 - Add IP addresses and/or MQ into **config file**.
 - Add **two-factor authentication**.
 - Add functionality for **restoring a password**.
+- When user gets session token, is it necessary to return an array of overriden tokens?
 - When a user gets session token, there's a potential threat that an attacker could generate user UID and get session their token.

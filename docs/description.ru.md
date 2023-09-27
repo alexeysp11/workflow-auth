@@ -88,40 +88,47 @@
     - `Login: string`, 
     - `Email: string`, 
     - `PhoneNumber: string`, 
-    - `Password: string`.
+    - `Password: string`,
+     - `UserType: string`.
 - **User existance** - объект наличия пользователя по введенным данным (наименование: `UserExistance`): 
-    - `LoginExists: bool`, 
-    - `EmailExists: bool`, 
-    - `PhoneNumberExists: bool`, 
+    - `LoginExists: bool`,
+    - `EmailExists: bool`,
+    - `PhoneNumberExists: bool`,
+     - `UserType: string`,
     - `ExceptionMessage: string`.
 - **User creation result** - результат добавления пользователя в БД (наименование: `UserCreationResult`):
     - `IsUserAdded: bool`,
-    - `SignUpGuid: string`, 
-    - `VerificationCode: string`, 
-    - `CodeSendingDt: DateTime`, 
+    - `SignUpGuid: string`,
+    - `VerificationCode: string`,
+    - `CodeSendingDt: DateTime`,
+     - `UserType: string`,
     - `ExceptionMessage: string`.
 - **Verify sign up request** - запрос на подтверждение регистрации с помощью верификационного кода (наименование: `VSURequest`): 
     - `SignUpGuid: string`, 
     - `TriesNumber: int`, 
     - `IsDeprecated: bool`, 
     - `IsOverriden: bool`, 
-    - `SignUpClosingCode: string`.
+    - `SignUpClosingCode: string`,
+     - `UserType: string`.
 - **Verify sign up response** - ответ на подтверждение регистрации с помощью верификационного кода (наименование: `VSUResponse`):
-    - `IsSuccessful: bool`, 
+    - `IsSuccessful: bool`,
+     - `UserType: string`,
     - `ExceptionMessage: string`.
 - **Verifying user credentials response** - ответ на верификацию пользовательских данных при вводе логина (наименование: `VUCResponse`):
     - `IsVerified: bool`, 
     - `SignInGuid: string`,
-    - `UserUid: string`, 
+    - `UserUid: string`,
+     - `UserType: string`,
     - `ExceptionMessage: string`.
 - **Token request** - запрос на получение сессионного токена для пользователя (наименование: `TokenRequest`):
     - `SignInGuid: string`,
-    - `UserUid: string`.
+    - `UserUid: string`,
+     - `UserType: string`.
 - **Session token** - сессионный токен (наименование: `SessionToken`):
     - `TokenGuid: string`, 
     - `TokenBeginDt: DateTime`,
     - `TokenEndDt: DateTime`,
-    - overriden tokens,
+     - `UserType: string`,
     - `ExceptionMessage: string`.
 <!--
 - **Deactivation code** - ответ на запрос деактивационного кода (наименование: `DeactivationCode`):
@@ -145,11 +152,13 @@
     - `token_guid: varchar` - сгенерированный GUID токена, 
     - `token_begin_dt: timestamp` - начало действия токена, 
     - `token_end_dt: timestamp` - окончание действия токена, 
-    - `user_guid: varchar` - GUID пользователя (сам пользователь и его персональные данные не хранятся на стороне сервиса).
+    - `user_guid: varchar` - GUID пользователя (сам пользователь и его персональные данные не хранятся на стороне сервиса),
+    - `user_type: varchar` - тип пользователя (админ, менеджер, потребитель, курьер etc) - нужен для того, чтобы быстрее определять, на какой бэкенд-сервис переадресовывать запрос.
 - **Sign up** - регистрация (наименование: `signup`): 
     - `signup_id: integer` - ИД регистрации,
     - `signup_guid: integer` - GUID регистрации,
     - `user_guid: varchar` - GUID созданного пользователя,
+    - `user_type: varchar` - тип пользователя,
     - `verification_code: varchar` - код подтверждения регистрации,
     - `vc_sending_dt: timestamp` - время отправки кода подтверждения,
     - `tries_number: integer` - количество попыток ввода кода регистрации,
@@ -166,6 +175,7 @@
     - `signin_id: integer` - ИД входа,
     - `signin_guid: integer` - GUID входа,
     - `user_guid: varchar` - GUID существующего пользователя,
+    - `user_type: varchar` - тип пользователя,
     - `signin_begin_dt: timestamp` - начало регистрации,
     - `signin_end_dt: timestamp` - конец регистрации,
     - `is_deprecated: boolean` - признак "устарел",

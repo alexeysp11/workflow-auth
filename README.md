@@ -22,7 +22,6 @@ Service for authentication and getting session tokens
 - PostgreSQL;
 - Entity Framework;
 - LINQ;
-- RabbitMQ;
 - WebAPI, gRPC.
 
 ## How to use

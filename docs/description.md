@@ -88,40 +88,47 @@ Read this in other languages: [English](description.md), [Russian/Русский
      - `Login: string`,
      - `Email: string`,
      - `PhoneNumber: string`,
-     - `Password: string`.
+     - `Password: string`,
+     - `UserType: string`.
 - **User existance** - object of user existence according to the entered data (name: `UserExistance`):
      - `LoginExists: bool`,
      - `EmailExists: bool`,
      - `PhoneNumberExists: bool`,
+     - `UserType: string`,
      - `ExceptionMessage: string`.
 - **User creation result** - the result of adding a user to the database (name: `UserCreationResult`):
      - `IsUserAdded: bool`,
      - `SignUpGuid: string`,
      - `VerificationCode: string`,
      - `CodeSendingDt: DateTime`,
+     - `UserType: string`,
      - `ExceptionMessage: string`.
 - **Verify sign up request** - request to confirm registration using a verification code (name: `VSURequest`):
      - `SignUpGuid: string`,
      - `TriesNumber: int`,
      - `IsDeprecated: bool`,
      - `IsOverriden: bool`,
-     - `SignUpClosingCode: string`.
+     - `SignUpClosingCode: string`,
+     - `UserType: string`.
 - **Verify sign up response** - response to confirmation of registration using the verification code (name: `VSUResponse`):
      - `IsSuccessful: bool`,
+     - `UserType: string`,
      - `ExceptionMessage: string`.
 - **Verifying user credentials response** - response to verification of user data when entering a login (name: `VUCResponse`):
      - `IsVerified: bool`,
      - `SignInGuid: string`,
      - `UserUid: string`,
+     - `UserType: string`,
      - `ExceptionMessage: string`.
 - **Token request** - request to receive a session token for the user (name: `TokenRequest`):
      - `SignInGuid: string`,
-     - `UserUid: string`.
+     - `UserUid: string`,
+     - `UserType: string`.
 - **Session token** - session token (name: `SessionToken`):
      - `TokenGuid: string`,
      - `TokenBeginDt: DateTime`,
      - `TokenEndDt: DateTime`,
-     - overridden tokens,
+     - `UserType: string`,
      - `ExceptionMessage: string`.
 <!--
 - **Deactivation code** - response to the request for a deactivation code (name: `DeactivationCode`):

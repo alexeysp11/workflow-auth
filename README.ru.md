@@ -21,7 +21,6 @@
 - PostgreSQL;
 - Entity Framework;
 - LINQ;
-- RabbitMQ;
 - WebAPI, gRPC.
 
 ## Примеры использования 
