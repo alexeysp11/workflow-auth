@@ -12,6 +12,9 @@ public class AuthResolver
         CheckUCConfig = ConfigHelper.GetUCConfigs();
     }
 
+    /// <summary>
+    /// Checks if specified user exists in the application database (request redirection is needed)
+    /// </summary>
     public UserExistance CheckUserExistance(UserCredentials request)
     {
         var response = new UserExistance();

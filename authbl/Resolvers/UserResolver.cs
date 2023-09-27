@@ -23,6 +23,7 @@ public class UserResolver
     {
         try
         {
+            // Redirect the request 
             string sql = @$"-- 
 select 1 as credentials_type, count(*) as qty from users where login = {request.Login}
 union 
