@@ -26,6 +26,10 @@ Read this in other languages: [English](README.md), [Russian/Русский](REA
 
 ## How to use
 
+[delivery-service-csharp](https://github.com/alexeysp11/delivery-service-csharp) could be considered as an example of using the authentication service:
+
+![authentication](https://github.com/alexeysp11/delivery-service-csharp/raw/main/docs/img/authentication.png)
+
 ## Useful links for developers
 
 - [Description of the service](docs/description.md).

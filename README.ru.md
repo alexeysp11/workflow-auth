@@ -25,6 +25,10 @@
 
 ## Примеры использования 
 
+В качестве примера, который использует данный сервис аутентификации, можно рассмотреть [delivery-service-csharp](https://github.com/alexeysp11/delivery-service-csharp):
+
+![authentication](https://github.com/alexeysp11/delivery-service-csharp/raw/main/docs/img/authentication.png)
+
 ## Полезные ссылки для разработчиков 
 
 - [Описание работы сервиса](docs/description.ru.md).

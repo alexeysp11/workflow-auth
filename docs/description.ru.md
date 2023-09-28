@@ -152,11 +152,11 @@
     - `token_guid: varchar` - сгенерированный GUID токена, 
     - `token_begin_dt: timestamp` - начало действия токена, 
     - `token_end_dt: timestamp` - окончание действия токена, 
-    - `user_guid: varchar` - GUID пользователя (сам пользователь и его персональные данные не хранятся на стороне сервиса),
+    - `user_guid: varchar` - GUID пользователя (сам пользователь и его персональные данные не хранятся на стороне данного сервиса),
     - `user_type: varchar` - тип пользователя (админ, менеджер, потребитель, курьер etc) - нужен для того, чтобы быстрее определять, на какой бэкенд-сервис переадресовывать запрос.
 - **Sign up** - регистрация (наименование: `signup`): 
     - `signup_id: integer` - ИД регистрации,
-    - `signup_guid: integer` - GUID регистрации,
+    - `signup_guid: varchar` - GUID регистрации,
     - `user_guid: varchar` - GUID созданного пользователя,
     - `user_type: varchar` - тип пользователя,
     - `verification_code: varchar` - код подтверждения регистрации,
@@ -166,7 +166,7 @@
     - `signup_end_dt: timestamp` - конец регистрации,
     - `is_deprecated: boolean` - признак "устарел",
     - `is_overriden: boolean` - признак "перезаписан",
-    - `auth_closing_code_id`: код закрытия.
+    - `auth_closing_code_id: integer` -  код закрытия.
 <!--
 - **Suspicious sign up** - подозрительная регистрация (наименование: `suspicios_signup`): 
     - повторяет поля таблицы `signup`.
@@ -180,7 +180,7 @@
     - `signin_end_dt: timestamp` - конец регистрации,
     - `is_deprecated: boolean` - признак "устарел",
     - `is_overriden: boolean` - признак "перезаписан",
-    - `auth_closing_code_id`: код закрытия.
+    - `auth_closing_code_id: integer` -  код закрытия.
 <!--
 - **Suspicious sign in** - подозрительный вход (наименование: `suspicios_signin`): 
     - повторяет поля таблицы `signin`.

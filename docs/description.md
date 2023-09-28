@@ -147,15 +147,15 @@ Read this in other languages: [English](description.md), [Russian/Русский
 
 ### Tables in the database
 
-- **Session token** - session token (name: `session_token`):
-     - `session_token_id: integer` - token ID,
+- **Session token** - session token (name: `auth_session_token`):
+     - `auth_session_token_id: integer` - token ID,
      - `token_guid: varchar` - generated token GUID,
      - `token_begin_dt: timestamp` - the beginning of the token,
      - `token_end_dt: timestamp` - end of token validity,
      - `user_guid: varchar` - user GUID (the user himself and his personal data are not stored on the service side).
-- **Sign up** - registration (name: `signup`):
-     - `signup_id: integer` - registration ID,
-     - `signup_guid: integer` - registration GUID,
+- **Sign up** - registration (name: `auth_signup`):
+     - `auth_signup_id: integer` - registration ID,
+     - `signup_guid: varchar` - registration GUID,
      - `user_guid: varchar` - GUID of the created user,
      - `verification_code: varchar` - registration confirmation code,
      - `vc_sending_dt: timestamp` - time of sending the confirmation code,
@@ -164,20 +164,20 @@ Read this in other languages: [English](description.md), [Russian/Русский
      - `signup_end_dt: timestamp` - end of registration,
      - `is_deprecated: boolean` - “deprecated” sign,
      - `is_overriden: boolean` - sign “overwritten”,
-     - `auth_closing_code_id`: closing code.
+     - `auth_closing_code_id: integer` -  closing code.
 <!--
 - **Suspicious sign up** - suspicious registration (name: `suspicios_signup`):
      - repeats the fields of the `signup` table.
 -->
-- **Sign in** - login to the application (name: `signin`):
-     - `signin_id: integer` - login ID,
+- **Sign in** - login to the application (name: `auth_signin`):
+     - `auth_signin_id: integer` - login ID,
      - `signin_guid: integer` - login GUID,
      - `user_guid: varchar` - GUID of the existing user,
      - `signin_begin_dt: timestamp` - start of registration,
      - `signin_end_dt: timestamp` - end of registration,
      - `is_deprecated: boolean` - “deprecated” sign,
      - `is_overriden: boolean` - sign “overwritten”,
-     - `auth_closing_code_id`: closing code.
+     - `auth_closing_code_id: integer` -  closing code.
 <!--
 - **Suspicious sign in** - suspicious input (name: `suspicios_signin`):
      - repeats the fields of the `signin` table.
