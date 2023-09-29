@@ -4,22 +4,22 @@ Read this in other languages: [English](description.md), [Russian/Русский
 
 ## Step-by-step description of how the client application and service work
 
-### Registration
+### Sign up
 
-1. The user opens the application and selects "Register".
+1. The user opens the application and selects "Sign up".
 2. The user enters login, email, phone number and password (password is entered twice).
      - The form validates the entered values.
      - If **validation is failed**, then an error message is displayed (we remain on the form and give the user the opportunity to enter the data again).
      - If **validation is passed**, then a **request to check the existence of the user** is sent to the authentication service in the database (login, email, phone).
          - Since users are not stored on the authentication service, the request must be forwarded to the backend service, which stores user information.
      - If **login does not exist** in the database, then a **request to add a user** to the database is sent to the authentication service, the service returns information on the created user (user creation flag, verification code, date/time of verification code creation).
-     - If **login exists**, the message “Sorry, a user with this name already exists. Please try again” will be displayed.
-     - All changes at this stage are entered into the “Registration” table.
+     - If **login exists**, the message "Sorry, a user with this name already exists. Please try again" will be displayed.
+     - All changes at this stage are entered into the "Sign up" table.
 <!--
-     - **Optional** (executed only if necessary at the business logic level of the client application): If **email** and/or **phone exists**, then the message “User with this email and/or phone number” is displayed already exists. For data security reasons, deactivate the previous account or try to remember the password for the previous account" and select "Remember password"/"Deactivate old account"/"Cancel".
-         - If the user clicks “Remember password”, he is redirected to the application login form.
-         - If the user clicks “Deactivate old entry”, then the user enters an email or phone number on the new form, clicks “Get deactivation code”, a request is sent to the authentication service, the service makes an entry in the “Deactivation” table and in response sends the deactivation code, the user confirms or does not confirm (see point 4). If confirmed, the client application sends a deactivation request, and then all active entries in the user and token tables are marked as outdated and overwritten.
-     - On the authentication service side, there is a job that marks entries in the “Registration” table.
+     - **Optional** (executed only if necessary at the business logic level of the client application): If **email** and/or **phone exists**, then the message "User with this email and/or phone number" is displayed already exists. For data security reasons, deactivate the previous account or try to remember the password for the previous account" and select "Remember password"/"Deactivate old account"/"Cancel".
+         - If the user clicks "Remember password", he is redirected to the application login form.
+         - If the user clicks "Deactivate old entry", then the user enters an email or phone number on the new form, clicks "Get deactivation code", a request is sent to the authentication service, the service makes an entry in the "Deactivation" table and in response sends the deactivation code, the user confirms or does not confirm (see point 4). If confirmed, the client application sends a deactivation request, and then all active entries in the user and token tables are marked as outdated and overwritten.
+     - On the authentication service side, there is a job that marks entries in the "Sign up" table.
 -->
 3. When adding a user, a verification code is sent to the specified email/phone number.
 4. The user enters the verification code.
@@ -27,25 +27,25 @@ Read this in other languages: [English](description.md), [Russian/Русский
      - You are given 3-5 attempts to enter the confirmation code.
      - The confirmation code is stored on the form.
          - If the user **closes the application**, then the registration GUID is lost, so even if the user **enters the application again after closing**, he is taken to the registration form and repeats all the steps again (the old attempt must be overwritten in step 1 ).
-     - If the user **confirmed the code**, then **we send a request** to the authentication service to **set the registration closing code** as “success”.
+     - If the user **confirmed the code**, then **we send a request** to the authentication service to **set the registration closing code** as "success".
 5. The user returns to the application login form (login entry).
 
 ![flowchart-signup](img/flowchart-signup.png)
 
-### Login to the application
+### Sign in 
 
-1. The user opens the application and selects "Login".
+1. The user opens the application and selects "Sign in".
 2. The user enters login and password.
      - The form validates the entered values.
      - If **validation fails**, then an error message is displayed (we remain on the form and give the user the opportunity to enter the data again).
      - If **validation passes**, then a **request for user verification** (login, password) is sent to the authentication service.
          - The request is redirected to the backend service.
-     - If **the user is not verified**, then we display the error message “Invalid login or password. Please try again.”
+     - If **the user is not verified**, then we display the error message "Invalid login or password. Please try again."
      - If **the user is verified**, then a **request to receive a session token** is sent to the authentication service.
          - If, when sending a session token to a client, it turns out that the token has expired, then its expiration date must be updated.
-     - All changes at this stage are entered into the “Login to the application” table.
+     - All changes at this stage are entered into the "Sign in" table.
      <!--
-     - If there are several login attempts in the temporary table during the day for the same user, then it is likely that they are trying to hack him, so after the nth time the exception “the number of login attempts has been exceeded” should be sent.
+     - If there are several login attempts in the temporary table during the day for the same user, then it is likely that they are trying to hack him, so after the nth time the exception "the number of login attempts has been exceeded" should be sent.
      -->
 3. The user enters the application.
 
@@ -162,8 +162,8 @@ Read this in other languages: [English](description.md), [Russian/Русский
      - `tries_number: integer` - number of attempts to enter the registration code,
      - `signup_begin_dt: timestamp` - start of registration,
      - `signup_end_dt: timestamp` - end of registration,
-     - `is_deprecated: boolean` - “deprecated” sign,
-     - `is_overriden: boolean` - sign “overwritten”,
+     - `is_deprecated: boolean` - "deprecated" sign,
+     - `is_overriden: boolean` - sign "overwritten",
      - `auth_closing_code_id: integer` -  closing code.
 <!--
 - **Suspicious sign up** - suspicious registration (name: `suspicios_signup`):
@@ -175,8 +175,8 @@ Read this in other languages: [English](description.md), [Russian/Русский
      - `user_guid: varchar` - GUID of the existing user,
      - `signin_begin_dt: timestamp` - start of registration,
      - `signin_end_dt: timestamp` - end of registration,
-     - `is_deprecated: boolean` - “deprecated” sign,
-     - `is_overriden: boolean` - sign “overwritten”,
+     - `is_deprecated: boolean` - "deprecated" sign,
+     - `is_overriden: boolean` - sign "overwritten",
      - `auth_closing_code_id: integer` -  closing code.
 <!--
 - **Suspicious sign in** - suspicious input (name: `suspicios_signin`):
@@ -203,8 +203,8 @@ Read this in other languages: [English](description.md), [Russian/Русский
      - `deactivation_begin_dt: timestamp` - start of deactivation,
      - `deactivation_end_dt: timestamp` - end of deactivation,
      - `tries_number: integer` - number of attempts to enter the deactivation code,
-     - `is_deprecated: boolean` - sign of “obsolete deactivation”,
-     - `is_overriden: boolean` - sign of “overwritten deactivation”,
+     - `is_deprecated: boolean` - sign of "obsolete deactivation",
+     - `is_overriden: boolean` - sign of "overwritten deactivation",
      - `deactivation_closing_code_id`: deactivation closing code.
 - **Deactivation-user** - deactivation-user (name: `deactivation_user`):
      - `deactivation_id` - deactivation ID,
