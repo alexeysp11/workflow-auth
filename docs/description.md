@@ -10,10 +10,10 @@ Read this in other languages: [English](description.md), [Russian/Русский
 2. The user enters login, email, phone number and password (password is entered twice).
      - The form validates the entered values.
      - If **validation is failed**, then an error message is displayed (we remain on the form and give the user the opportunity to enter the data again).
-     - If **validation is passed**, then a **request to check the existence of the user** is sent to the authentication service in the database (login, email, phone).
+     - If **validation passes**, then a **request to add a user** to the database is sent to the authentication service (login, email, phone), the service returns information on the created user (user creation flag, verification code, date/time of creation verification code).
          - Since users are not stored on the authentication service, the request must be forwarded to the backend service, which stores user information.
-     - If **login does not exist** in the database, then a **request to add a user** to the database is sent to the authentication service, the service returns information on the created user (user creation flag, verification code, date/time of verification code creation).
-     - If **login exists**, the message "Sorry, a user with this name already exists. Please try again" will be displayed.
+         - The backend service checks the presence of the user in the database, and then adds it to the “Temporary user” table if **login does not exist**.
+         - If **login exists**, the message “Sorry, a user with this name already exists. Please try again” will be displayed.
      - All changes at this stage are entered into the "Sign up" table.
 <!--
      - **Optional** (executed only if necessary at the business logic level of the client application): If **email** and/or **phone exists**, then the message "User with this email and/or phone number" is displayed already exists. For data security reasons, deactivate the previous account or try to remember the password for the previous account" and select "Remember password"/"Deactivate old account"/"Cancel".
