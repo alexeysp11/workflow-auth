@@ -55,9 +55,6 @@
 
 ### Регистрация 
 
-- **Check user existance** - проверка наличия пользователя в БД (наименование: `CheckUserExistance`):
-    - input: `UserCredentials`;
-    - output: `UserExistance`.
 - **Add user** - добавление пользователя (наименование: `AddUser`):
     - input: `UserCredentials`;
     - output: `UserCreationResult`.
@@ -90,12 +87,6 @@
     - `PhoneNumber: string`, 
     - `Password: string`,
      - `UserType: string`.
-- **User existance** - объект наличия пользователя по введенным данным (наименование: `UserExistance`): 
-    - `LoginExists: bool`,
-    - `EmailExists: bool`,
-    - `PhoneNumberExists: bool`,
-     - `UserType: string`,
-    - `ExceptionMessage: string`.
 - **User creation result** - результат добавления пользователя в БД (наименование: `UserCreationResult`):
     - `IsUserAdded: bool`,
     - `SignUpGuid: string`,

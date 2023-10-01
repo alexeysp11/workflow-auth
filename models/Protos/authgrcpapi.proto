@@ -6,7 +6,6 @@ option csharp_namespace = "WokflowLib.Authentication.Models.Protos";
 package DeliveryFiles;
 
 service AuthGrpcApi {
-  rpc CheckUserExistance (UserCredentials) returns (UserExistance);
   rpc AddUser (UserCredentials) returns (UserCreationResult);
   rpc VerifySignUp (VSURequest) returns (VSUResponse);
   rpc VerifyUserCredentials (UserCredentials) returns (VUCResponse);
@@ -18,13 +17,6 @@ message UserCredentials {
   string Email = 2;
   string PhoneNumber = 3;
   string Password = 4;
-}
-
-message UserExistance {
-  bool LoginExists = 1;
-  bool EmailExists = 2;
-  bool PhoneNumberExists = 3;
-  bool ExceptionMessage = 4;
 }
 
 message UserCreationResult {

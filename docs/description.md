@@ -55,9 +55,6 @@ Read this in other languages: [English](description.md), [Russian/Русский
 
 ### Sign up 
 
-- **Check user existence** - checking the presence of a user in the database (name: `CheckUserExistance`):
-     - input: `UserCredentials`;
-     - output: `UserExistance`.
 - **Add user** - adding a user (name: `AddUser`):
      - input: `UserCredentials`;
      - output: `UserCreationResult`.
@@ -90,12 +87,6 @@ Read this in other languages: [English](description.md), [Russian/Русский
      - `PhoneNumber: string`,
      - `Password: string`,
      - `UserType: string`.
-- **User existance** - object of user existence according to the entered data (name: `UserExistance`):
-     - `LoginExists: bool`,
-     - `EmailExists: bool`,
-     - `PhoneNumberExists: bool`,
-     - `UserType: string`,
-     - `ExceptionMessage: string`.
 - **User creation result** - the result of adding a user to the database (name: `UserCreationResult`):
      - `IsUserAdded: bool`,
      - `SignUpGuid: string`,
