@@ -50,8 +50,7 @@ public class AuthResolver
             if (CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
                 throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
-            new UserResolver().AddUser(request, response);
-            new VerificationCodeResolver().GenerateVerificationCode(response);
+            // Call auth backend via http
         }
         catch (System.Exception ex)
         {
@@ -68,7 +67,7 @@ public class AuthResolver
             // Decide if the verification was successful based on the token info from request 
             // Notify other services, that are specified in a config file, about the status of token (verified, not verified)
             // 
-            response.IsSuccessful = true;
+            // Call auth backend via http
         }
         catch (System.Exception ex)
         {

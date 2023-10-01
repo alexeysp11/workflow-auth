@@ -4,6 +4,9 @@ namespace WokflowLib.Authentication.AuthBL;
 
 public static class ConfigHelper
 {
+    /// <summary>
+    /// Check user credentials config file 
+    /// </summary>
     public static CheckUCConfig GetUCConfigs()
     {
         return new CheckUCConfig()
