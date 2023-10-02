@@ -1,5 +1,6 @@
 using System.Data;
 using Cims.WorkflowLib.DbConnections;
+using Cims.WorkflowLib.Models.ErrorHandling;
 using WokflowLib.Authentication.Models;
 using WokflowLib.Authentication.Models.NetworkParameters;
 
@@ -39,7 +40,12 @@ select 2 as credentials_type, count(*) as qty from users where phone_number = {r
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
     }
 
@@ -57,7 +63,12 @@ select 2 as credentials_type, count(*) as qty from users where phone_number = {r
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
     }
 
@@ -77,7 +88,12 @@ select 2 as credentials_type, count(*) as qty from users where phone_number = {r
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
     }
 }

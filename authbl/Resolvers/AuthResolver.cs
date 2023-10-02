@@ -1,3 +1,8 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Cims.WorkflowLib.NetworkApis;
+using Cims.WorkflowLib.Models.ErrorHandling;
+using Cims.WorkflowLib.Models.Network;
 using WokflowLib.Authentication.Models.ConfigParameters;
 using WokflowLib.Authentication.Models.NetworkParameters;
 
@@ -31,7 +36,12 @@ public class AuthResolver
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
         return response;
     }
@@ -50,11 +60,26 @@ public class AuthResolver
             if (CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
                 throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
-            // Call auth backend via http
+            ApiOperation httpResponse = new ApiOperation();
+            var task = Task.Run(async () => 
+            {
+                httpResponse = await new HttpSender().SendAsync("https://localhost:7251/Auth/AddUser", request, "Auth/AddUser");
+            });
+            task.Wait();
+            response = JsonSerializer.Deserialize<UserCreationResult>(httpResponse.Response, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            System.Console.WriteLine(ex);
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
         return response;
     }
@@ -71,7 +96,12 @@ public class AuthResolver
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
         return response;
     }
@@ -86,11 +116,20 @@ public class AuthResolver
             if (CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
                 throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
-            new UserResolver().VerifyUserCredentials(request, response);
+            var responseStr = new HttpSender().Send("https://localhost:7251/Auth/VerifyUserCredentials", request);
+            response = JsonSerializer.Deserialize<VUCResponse>(responseStr, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
         return response;
     }
@@ -107,7 +146,12 @@ public class AuthResolver
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
         return response;
     }

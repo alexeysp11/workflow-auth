@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Cims.WorkflowLib.DbConnections;
+using Cims.WorkflowLib.Models.ErrorHandling;
 using WokflowLib.Authentication.Models;
 using WokflowLib.Authentication.Models.NetworkParameters;
 
@@ -34,7 +35,12 @@ values ('{response.TokenGuid}','{response.TokenBeginDt}','{response.TokenEndDt}'
         }
         catch (System.Exception ex)
         {
-            response.ExceptionMessage = ex.ToString();
+            response.WorkflowException = new WorkflowException
+            {
+                Message = ex.Message,
+                StackTrace = ex.StackTrace,
+                FullMessage = ex.ToString()
+            };
         }
     }
     /// <summary>
