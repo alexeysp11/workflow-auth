@@ -1,3 +1,5 @@
+using Cims.WorkflowLib.Models.ErrorHandling;
+
 namespace WokflowLib.Authentication.Models.NetworkParameters;
 
 public class DeactivationCode
@@ -6,4 +8,5 @@ public class DeactivationCode
     public string? Code { get; set; }
     public System.DateTime CodeSendingDt { get; set; }
     public string? ExceptionMessage { get; set; }
+    public WorkflowException? WorkflowException { get; set; }
 }

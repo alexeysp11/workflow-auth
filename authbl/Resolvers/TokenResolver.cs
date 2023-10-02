@@ -29,8 +29,8 @@ public class TokenResolver
             response.TokenBeginDt = System.DateTime.Now;
             response.TokenEndDt = response.TokenBeginDt.AddHours(HoursToAdd);
             PgDbConnection.ExecuteSqlCommand(@$"-- 
-    insert into public.deliveryservice_auth_token(session_token_guid,begin_datetime,end_datetime)
-    values ('{response.TokenGuid}','{response.TokenBeginDt}','{response.TokenEndDt}');");
+insert into public.deliveryservice_auth_token(session_token_guid,begin_datetime,end_datetime)
+values ('{response.TokenGuid}','{response.TokenBeginDt}','{response.TokenEndDt}');");
         }
         catch (System.Exception ex)
         {
