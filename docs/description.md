@@ -53,74 +53,34 @@ Read this in other languages: [English](description.md), [Russian/Русский
 
 ## Methods for processing network requests
 
+Network requests are processed using the [AuthResolver](authbl/AuthResolver.md) class.
+
 ### Sign up 
 
-- **Add user** - adding a user (name: `AddUser`):
-     - input: `UserCredentials`;
-     - output: `UserCreationResult`.
-- **Verify sign up** - verification of registration completion (name: `VerifySignUp`):
-     - input: `VSURequest`;
-     - output: `VSUResponse`.
+- **Add user** - adding a user (method: `AddUser()`).
+- **Verify sign up** - verification of registration completion (method: `VerifySignUp()`).
 <!--
-- **Get deacitvation code** - getting the deactivation code (name: `GetDeactivationCode`):
+- **Get deacitvation code** - getting the deactivation code (method: `GetDeactivationCode()`).:
      - input: `UserCredentials`;
      - output: `DeactivationCode`.
-- **Deactivate users** - deactivate users (name: `DeactivateUsers`):
+- **Deactivate users** - deactivate users (method: `DeactivateUsers()`).:
      - input: `DeactivationRequest`;
      - output: `DeactivationResponse`.
 -->
 
 ### Login to the application
 
-- **Verify user credentials** - user verification (name: `VerifyUserCredentials`)
-     - input: `UserCredentials`;
-     - output: `VUCResponse`.
-- **Get token by user UID** - updating the session token by user UID (name: `GetTokenByUserUid`)
-     - input: `TokenRequest`;
-     - output: `SessionToken`.
+- **Verify user credentials** - user verification (method: `VerifyUserCredentials()`).
+- **Get token by user UID** - updating the session token by user UID (method: `GetTokenByUserUid()`).
 
 ### JSON objects for internetworking
-
-- **User credentials** - user data (name: `UserCredentials`):
-     - `Login: string`,
-     - `Email: string`,
-     - `PhoneNumber: string`,
-     - `Password: string`,
-     - `UserType: string`.
-- **User creation result** - the result of adding a user to the database (name: `UserCreationResult`):
-     - `IsUserAdded: bool`,
-     - `SignUpGuid: string`,
-     - `VerificationCode: string`,
-     - `CodeSendingDt: DateTime`,
-     - `UserType: string`,
-     - `ExceptionMessage: string`.
-- **Verify sign up request** - request to confirm registration using a verification code (name: `VSURequest`):
-     - `SignUpGuid: string`,
-     - `TriesNumber: int`,
-     - `IsDeprecated: bool`,
-     - `IsOverriden: bool`,
-     - `SignUpClosingCode: string`,
-     - `UserType: string`.
-- **Verify sign up response** - response to confirmation of registration using the verification code (name: `VSUResponse`):
-     - `IsSuccessful: bool`,
-     - `UserType: string`,
-     - `ExceptionMessage: string`.
-- **Verifying user credentials response** - response to verification of user data when entering a login (name: `VUCResponse`):
-     - `IsVerified: bool`,
-     - `SignInGuid: string`,
-     - `UserUid: string`,
-     - `UserType: string`,
-     - `ExceptionMessage: string`.
-- **Token request** - request to receive a session token for the user (name: `TokenRequest`):
-     - `SignInGuid: string`,
-     - `UserUid: string`,
-     - `UserType: string`.
-- **Session token** - session token (name: `SessionToken`):
-     - `TokenGuid: string`,
-     - `TokenBeginDt: DateTime`,
-     - `TokenEndDt: DateTime`,
-     - `UserType: string`,
-     - `ExceptionMessage: string`.
+- [UserCredentials](models/NetworkParameters/UserCredentials.md) - user data.
+- [UserCreationResult](models/NetworkParameters/UserCreationResult.md) - the result of adding a user to the database.
+- [VSURequest](models/NetworkParameters/VSURequest.md) - request to confirm registration using a verification code.
+- [VSUResponse](models/NetworkParameters/VSUResponse.md) - response to confirmation of registration using the verification code.
+- [VUCResponse](models/NetworkParameters/VUCResponse.md) - response to verification of user data when entering a login.
+- [TokenRequest](models/NetworkParameters/TokenRequest.md) - request to obtain a session token for the user.
+- [SessionToken](models/NetworkParameters/SessionToken.md) - session token.
 <!--
 - **Deactivation code** - response to the request for a deactivation code (name: `DeactivationCode`):
      - `DeactivationGuid: string`,

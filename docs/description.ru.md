@@ -75,46 +75,13 @@
 
 ### JSON объекты для межсетевого взаимодействия 
 
-- **User credentials** - пользовательские данные (наименование: `UserCredentials`): 
-    - `Login: string`, 
-    - `Email: string`, 
-    - `PhoneNumber: string`, 
-    - `Password: string`,
-     - `UserType: string`.
-- **User creation result** - результат добавления пользователя в БД (наименование: `UserCreationResult`):
-    - `IsUserAdded: bool`,
-    - `SignUpGuid: string`,
-    - `VerificationCode: string`,
-    - `CodeSendingDt: DateTime`,
-    - `UserType: string`,
-    - `ExceptionMessage: string`.
-- **Verify sign up request** - запрос на подтверждение регистрации с помощью верификационного кода (наименование: `VSURequest`): 
-    - `SignUpGuid: string`, 
-    - `TriesNumber: int`, 
-    - `IsDeprecated: bool`, 
-    - `IsOverriden: bool`, 
-    - `SignUpClosingCode: string`,
-    - `UserType: string`.
-- **Verify sign up response** - ответ на подтверждение регистрации с помощью верификационного кода (наименование: `VSUResponse`):
-    - `IsSuccessful: bool`,
-     - `UserType: string`,
-    - `ExceptionMessage: string`.
-- **Verifying user credentials response** - ответ на верификацию пользовательских данных при вводе логина (наименование: `VUCResponse`):
-    - `IsVerified: bool`, 
-    - `SignInGuid: string`,
-    - `UserUid: string`,
-     - `UserType: string`,
-    - `ExceptionMessage: string`.
-- **Token request** - запрос на получение сессионного токена для пользователя (наименование: `TokenRequest`):
-    - `SignInGuid: string`,
-    - `UserUid: string`,
-     - `UserType: string`.
-- **Session token** - сессионный токен (наименование: `SessionToken`):
-    - `TokenGuid: string`, 
-    - `TokenBeginDt: DateTime`,
-    - `TokenEndDt: DateTime`,
-     - `UserType: string`,
-    - `ExceptionMessage: string`.
+- [UserCredentials](models/NetworkParameters/UserCredentials.md) - пользовательские данные.
+- [UserCreationResult](models/NetworkParameters/UserCreationResult.md) - результат добавления пользователя в БД.
+- [VSURequest](models/NetworkParameters/VSURequest.md) - запрос на подтверждение регистрации с помощью верификационного кода.
+- [VSUResponse](models/NetworkParameters/VSUResponse.md) - ответ на подтверждение регистрации с помощью верификационного кода.
+- [VUCResponse](models/NetworkParameters/VUCResponse.md) - ответ на верификацию пользовательских данных при вводе логина.
+- [TokenRequest](models/NetworkParameters/TokenRequest.md) - запрос на получение сессионного токена для пользователя.
+- [SessionToken](models/NetworkParameters/SessionToken.md) - сессионный токен.
 <!--
 - **Deactivation code** - ответ на запрос деактивационного кода (наименование: `DeactivationCode`):
     - `DeactivationGuid: string`, 
