@@ -53,31 +53,25 @@
 
 ## Методы для обработки сетевых запросов
 
+Обработка сетевых запросов производится внутри класса [AuthResolver](authbl/AuthResolver.md).
+
 ### Регистрация 
 
-- **Add user** - добавление пользователя (наименование: `AddUser`):
-    - input: `UserCredentials`;
-    - output: `UserCreationResult`.
-- **Verify sign up** - верификация завершения регистрации (наименование: `VerifySignUp`):
-    - input: `VSURequest`;
-    - output: `VSUResponse`.
+- **Add user** - добавление пользователя (метод: `AddUser()`).
+- **Verify sign up** - верификация завершения регистрации (метод: `VerifySignUp()`).
 <!--
-- **Get deacitvation code** - получение кода деактивации (наименование: `GetDeactivationCode`):
+- **Get deacitvation code** - получение кода деактивации (метод: `GetDeactivationCode()`):
     - input: `UserCredentials`; 
     - output: `DeactivationCode`.
-- **Deactivate users** - деактивация пользователей (наименование: `DeactivateUsers`): 
+- **Deactivate users** - деактивация пользователей (метод: `DeactivateUsers()`): 
     - input: `DeactivationRequest`;
     - output: `DeactivationResponse`.
 -->
 
 ### Вход в приложение 
 
-- **Verify user credentials** - верификация пользователя (наименование: `VerifyUserCredentials`)
-    - input: `UserCredentials`;
-    - output: `VUCResponse`.
-- **Get token by user UID** - обновление сессионного токена по UID пользователя (наименование: `GetTokenByUserUid`)
-    - input: `TokenRequest`; 
-    - output: `SessionToken`.
+- **Verify user credentials** - верификация пользователя (метод: `VerifyUserCredentials()`).
+- **Get token by user UID** - обновление сессионного токена по UID пользователя (метод: `GetTokenByUserUid()`).
 
 ### JSON объекты для межсетевого взаимодействия 
 
@@ -92,7 +86,7 @@
     - `SignUpGuid: string`,
     - `VerificationCode: string`,
     - `CodeSendingDt: DateTime`,
-     - `UserType: string`,
+    - `UserType: string`,
     - `ExceptionMessage: string`.
 - **Verify sign up request** - запрос на подтверждение регистрации с помощью верификационного кода (наименование: `VSURequest`): 
     - `SignUpGuid: string`, 
@@ -100,7 +94,7 @@
     - `IsDeprecated: bool`, 
     - `IsOverriden: bool`, 
     - `SignUpClosingCode: string`,
-     - `UserType: string`.
+    - `UserType: string`.
 - **Verify sign up response** - ответ на подтверждение регистрации с помощью верификационного кода (наименование: `VSUResponse`):
     - `IsSuccessful: bool`,
      - `UserType: string`,

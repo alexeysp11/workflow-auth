@@ -8,17 +8,23 @@ using WokflowLib.Authentication.Models.NetworkParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
+/// <summary>
+/// Class that processes authentication requests.
+/// </summary>
 public class AuthResolver
 {
     private CheckUCConfig CheckUCConfig { get; set; }
 
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
     public AuthResolver()
     {
         CheckUCConfig = ConfigHelper.GetUCConfigs();
     }
 
     /// <summary>
-    /// Checks if specified user exists in the application database (request redirection is needed)
+    /// Method that checks if the specified user exists in the database.
     /// </summary>
     public UserExistance CheckUserExistance(UserCredentials request)
     {
@@ -46,6 +52,9 @@ public class AuthResolver
         return response;
     }
 
+    /// <summary>
+    /// Method that creates the specified user.
+    /// </summary>
     public UserCreationResult AddUser(UserCredentials request)
     {
         var response = new UserCreationResult();
@@ -84,6 +93,9 @@ public class AuthResolver
         return response;
     }
 
+    /// <summary>
+    /// Method for verification of sign up completion.
+    /// </summary>
     public VSUResponse VerifySignUp(VSURequest request)
     {
         var response = new VSUResponse();
@@ -106,6 +118,9 @@ public class AuthResolver
         return response;
     }
 
+    /// <summary>
+    /// Method for user verification.
+    /// </summary>
     public VUCResponse VerifyUserCredentials(UserCredentials request)
     {
         var response = new VUCResponse();
@@ -134,6 +149,9 @@ public class AuthResolver
         return response;
     }
 
+    /// <summary>
+    /// Method for getting and/or updating the session token by user UID.
+    /// </summary>
     public SessionToken GetTokenByUserUid(TokenRequest request)
     {
         var response = new SessionToken();
