@@ -7,4 +7,7 @@
 
 ## Classes 
 
+- [AuthClosingCode](AuthClosingCode.md)
+- [AuthClosingCodeType](AuthClosingCodeType.md)
 - [AuthSignIn](AuthSignIn.md)
+- [AuthSignUp](AuthSignUp.md)
