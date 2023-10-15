@@ -51,7 +51,7 @@
 
 ![flowchart-signin](img/flowchart-signin.png)
 
-## Методы для обработки сетевых запросов
+## Сетевое взаимодействие
 
 Обработка сетевых запросов производится внутри класса [AuthResolver](authbl/AuthResolver.md).
 
@@ -73,7 +73,7 @@
 - **Verify user credentials** - верификация пользователя (метод: `VerifyUserCredentials()`).
 - **Get token by user UID** - обновление сессионного токена по UID пользователя (метод: `GetTokenByUserUid()`).
 
-### JSON объекты для межсетевого взаимодействия 
+### Data transfer objects
 
 - [UserCredentials](models/NetworkParameters/UserCredentials.md) - пользовательские данные.
 - [UserCreationResult](models/NetworkParameters/UserCreationResult.md) - результат добавления пользователя в БД.
@@ -82,86 +82,10 @@
 - [VUCResponse](models/NetworkParameters/VUCResponse.md) - ответ на верификацию пользовательских данных при вводе логина.
 - [TokenRequest](models/NetworkParameters/TokenRequest.md) - запрос на получение сессионного токена для пользователя.
 - [SessionToken](models/NetworkParameters/SessionToken.md) - сессионный токен.
-<!--
-- **Deactivation code** - ответ на запрос деактивационного кода (наименование: `DeactivationCode`):
-    - `DeactivationGuid: string`, 
-    - `Code: string`, 
-    - `CodeSendingDt: DateTime`, 
-    - `ExceptionMessage: string`.
-- **Deactivation request** - запрос деактивации (наименование: `DeactivationRequest`):
-    - `DeactivationGuid: string`.
-- **Deactivation response** - результат деактивации (наименование: `DeactivationResponse`):
-    - `IsSuccessful: bool`, 
-    - `ExceptionMessage: string`.
--->
-
-## Хранение и обработка данных 
 
 ### Таблицы в БД 
 
-- **Session token** - сессионный токен (наименование: `session_token`):
-    - `session_token_id: integer` - ИД токена,
-    - `token_guid: varchar` - сгенерированный GUID токена, 
-    - `token_begin_dt: timestamp` - начало действия токена, 
-    - `token_end_dt: timestamp` - окончание действия токена, 
-    - `user_guid: varchar` - GUID пользователя (сам пользователь и его персональные данные не хранятся на стороне данного сервиса),
-    - `user_type: varchar` - тип пользователя (админ, менеджер, потребитель, курьер etc) - нужен для того, чтобы быстрее определять, на какой бэкенд-сервис переадресовывать запрос.
-- **Sign up** - регистрация (наименование: `signup`): 
-    - `signup_id: integer` - ИД регистрации,
-    - `signup_guid: varchar` - GUID регистрации,
-    - `user_guid: varchar` - GUID созданного пользователя,
-    - `user_type: varchar` - тип пользователя,
-    - `verification_code: varchar` - код подтверждения регистрации,
-    - `vc_sending_dt: timestamp` - время отправки кода подтверждения,
-    - `tries_number: integer` - количество попыток ввода кода регистрации,
-    - `signup_begin_dt: timestamp` - начало регистрации,
-    - `signup_end_dt: timestamp` - конец регистрации,
-    - `is_deprecated: boolean` - признак "устарел",
-    - `is_overriden: boolean` - признак "перезаписан",
-    - `auth_closing_code_id: integer` -  код закрытия.
-<!--
-- **Suspicious sign up** - подозрительная регистрация (наименование: `suspicios_signup`): 
-    - повторяет поля таблицы `signup`.
--->
-- **Sign in** - вход в приложение (наименование: `signin`):
-    - `signin_id: integer` - ИД входа,
-    - `signin_guid: integer` - GUID входа,
-    - `user_guid: varchar` - GUID существующего пользователя,
-    - `user_type: varchar` - тип пользователя,
-    - `signin_begin_dt: timestamp` - начало регистрации,
-    - `signin_end_dt: timestamp` - конец регистрации,
-    - `is_deprecated: boolean` - признак "устарел",
-    - `is_overriden: boolean` - признак "перезаписан",
-    - `auth_closing_code_id: integer` -  код закрытия.
-<!--
-- **Suspicious sign in** - подозрительный вход (наименование: `suspicios_signin`): 
-    - повторяет поля таблицы `signin`.
--->
-- **Authentication closing code** - код закрытия аутентификации (наименование: `auth_closing_code`):
-    - Поля: 
-        - `auth_closing_code_id: integer` - ИД кода закрытия аутентификации,
-        - `guid: string` - UID кода закрытия аутентификации,
-        - `name: string`- наименование.
-    - Возможные значения:
-        - `success` - успех,
-        - `rejectedToProvideVC` - отказ в предоставлении кода подтверждения,
-        - `tooManyTries` - исчерпано количество попыток подтверждения кода,
-        - `timeout` - отвалился по таймауту,
-        - `overriden` - перезаписан,
-        - `cancelled` - отмена.
-<!--
-- **Deactivation** - деактивация (наименование: `deactivation`):
-    - `deactivation_id` - ИД деактивации,
-    - `deactivation_uid` - UID деактивации,
-    - `deactivation_code: varchar` - код деактивации,
-    - `dc_sending_dt: timestamp` - время отправки кода подтверждения,
-    - `deactivation_begin_dt: timestamp` - начало деактивации,
-    - `deactivation_end_dt: timestamp` - конец деактивации,
-    - `tries_number: integer` - количество попыток ввода кода деактивации,
-    - `is_deprecated: boolean` - признак "устаревшая деактивация",
-    - `is_overriden: boolean` - признак "перезаписанная деактивация",
-    - `deactivation_closing_code_id`: код закрытия деактивации.
-- **Deactivation-user** - деактивация-пользователь (наименование: `deactivation_user`):
-    - `deactivation_id` - ИД деактивации,
-    - `user_guid: varchar` - GUID существующего пользователя.
--->
+- [auth_session_token](dbtables/auth_session_token.md) - сессионный токен (соответствует [SessionToken](models/NetworkParameters/SessionToken.md)).
+- [auth_signup](dbtables/auth_signup.md) - регистрация (соответствует [AuthSignUp](models/AuthSignUp.md)).
+- [auth_signin](dbtables/auth_signin.md) - вход в приложение (соответствует [AuthSignIn](models/AuthSignIn.md)).
+- [auth_closing_code](dbtables/auth_closing_code.md) - код закрытия аутентификации (соответствует [AuthClosingCode](models/AuthClosingCode.md) или [AuthClosingCodeType](models/AuthClosingCodeType.md)).

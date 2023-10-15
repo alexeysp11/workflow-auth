@@ -51,7 +51,7 @@ Read this in other languages: [English](description.md), [Russian/Русский
 
 ![flowchart-signin](img/flowchart-signin.png)
 
-## Methods for processing network requests
+## Network communication
 
 Network requests are processed using the [AuthResolver](authbl/AuthResolver.md) class.
 
@@ -73,7 +73,8 @@ Network requests are processed using the [AuthResolver](authbl/AuthResolver.md) 
 - **Verify user credentials** - user verification (method: `VerifyUserCredentials()`).
 - **Get token by user UID** - updating the session token by user UID (method: `GetTokenByUserUid()`).
 
-### JSON objects for internetworking
+### Data transfer objects
+
 - [UserCredentials](models/NetworkParameters/UserCredentials.md) - user data.
 - [UserCreationResult](models/NetworkParameters/UserCreationResult.md) - the result of adding a user to the database.
 - [VSURequest](models/NetworkParameters/VSURequest.md) - request to confirm registration using a verification code.
@@ -81,83 +82,10 @@ Network requests are processed using the [AuthResolver](authbl/AuthResolver.md) 
 - [VUCResponse](models/NetworkParameters/VUCResponse.md) - response to verification of user data when entering a login.
 - [TokenRequest](models/NetworkParameters/TokenRequest.md) - request to obtain a session token for the user.
 - [SessionToken](models/NetworkParameters/SessionToken.md) - session token.
-<!--
-- **Deactivation code** - response to the request for a deactivation code (name: `DeactivationCode`):
-     - `DeactivationGuid: string`,
-     - `Code: string`,
-     - `CodeSendingDt: DateTime`,
-     - `ExceptionMessage: string`.
-- **Deactivation request** - deactivation request (name: `DeactivationRequest`):
-     - `DeactivationGuid: string`.
-- **Deactivation response** - deactivation result (name: `DeactivationResponse`):
-     - `IsSuccessful: bool`,
-     - `ExceptionMessage: string`.
--->
-
-## Data storage and processing
 
 ### Tables in the database
 
-- **Session token** - session token (name: `auth_session_token`):
-     - `auth_session_token_id: integer` - token ID,
-     - `token_guid: varchar` - generated token GUID,
-     - `token_begin_dt: timestamp` - the beginning of the token,
-     - `token_end_dt: timestamp` - end of token validity,
-     - `user_guid: varchar` - user GUID (the user himself and his personal data are not stored on the service side).
-- **Sign up** - registration (name: `auth_signup`):
-     - `auth_signup_id: integer` - registration ID,
-     - `signup_guid: varchar` - registration GUID,
-     - `user_guid: varchar` - GUID of the created user,
-     - `verification_code: varchar` - registration confirmation code,
-     - `vc_sending_dt: timestamp` - time of sending the confirmation code,
-     - `tries_number: integer` - number of attempts to enter the registration code,
-     - `signup_begin_dt: timestamp` - start of registration,
-     - `signup_end_dt: timestamp` - end of registration,
-     - `is_deprecated: boolean` - "deprecated" sign,
-     - `is_overriden: boolean` - sign "overwritten",
-     - `auth_closing_code_id: integer` -  closing code.
-<!--
-- **Suspicious sign up** - suspicious registration (name: `suspicios_signup`):
-     - repeats the fields of the `signup` table.
--->
-- **Sign in** - login to the application (name: `auth_signin`):
-     - `auth_signin_id: integer` - login ID,
-     - `signin_guid: integer` - login GUID,
-     - `user_guid: varchar` - GUID of the existing user,
-     - `signin_begin_dt: timestamp` - start of registration,
-     - `signin_end_dt: timestamp` - end of registration,
-     - `is_deprecated: boolean` - "deprecated" sign,
-     - `is_overriden: boolean` - sign "overwritten",
-     - `auth_closing_code_id: integer` -  closing code.
-<!--
-- **Suspicious sign in** - suspicious input (name: `suspicios_signin`):
-     - repeats the fields of the `signin` table.
--->
-- **Authentication closing code** - authentication closing code (name: `auth_closing_code`):
-     - Fields:
-         - `auth_closing_code_id: integer` - authentication closing code ID,
-         - `guid: string` - UID of the authentication closing code,
-         - `name: string` - name.
-     - Possible values:
-         - `success` - success,
-         - `rejectedToProvideVC` - refusal to provide a confirmation code,
-         - `tooManyTries` - the number of attempts to confirm the code has been exhausted,
-         - `timeout` - fell off due to timeout,
-         - `overriden` - overwritten,
-         - `cancelled` - cancellation.
-<!--
-- **Deactivation** - deactivation (name: `deactivation`):
-     - `deactivation_id` - deactivation ID,
-     - `deactivation_uid` - deactivation UID,
-     - `deactivation_code: varchar` - deactivation code,
-     - `dc_sending_dt: timestamp` - time of sending the confirmation code,
-     - `deactivation_begin_dt: timestamp` - start of deactivation,
-     - `deactivation_end_dt: timestamp` - end of deactivation,
-     - `tries_number: integer` - number of attempts to enter the deactivation code,
-     - `is_deprecated: boolean` - sign of "obsolete deactivation",
-     - `is_overriden: boolean` - sign of "overwritten deactivation",
-     - `deactivation_closing_code_id`: deactivation closing code.
-- **Deactivation-user** - deactivation-user (name: `deactivation_user`):
-     - `deactivation_id` - deactivation ID,
-     - `user_guid: varchar` - GUID of an existing user.
--->
+- [auth_session_token](dbtables/auth_session_token.md) - session token (corresponds to [SessionToken](models/NetworkParameters/SessionToken.md)).
+- [auth_signup](dbtables/auth_signup.md) - sign up (corresponds to [AuthSignUp](models/AuthSignUp.md)).
+- [auth_signin](dbtables/auth_signin.md) - sign in (corresponds to [AuthSignIn](models/AuthSignIn.md)).
+- [auth_closing_code](dbtables/auth_closing_code.md) - authentication closing code (corresponds to [AuthClosingCode](models/AuthClosingCode.md) or [AuthClosingCodeType](models/AuthClosingCodeType.md)).
