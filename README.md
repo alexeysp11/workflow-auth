@@ -8,7 +8,7 @@ Read this in other languages: [English](README.md), [Russian/Русский](REA
 
 - This service writes/reads session tokens in the database.
 - PostgreSQL is used as a database.
-- In order to reduce the risk of compromise of personal data, the service does not store any data associated with users: only user GUIDs, as well as tables directly related to authentication ("session token", "temporary registration", "suspicious registration").
+- In order to reduce the risk of compromise of personal data, the service does not store any data associated with users: only user GUIDs, as well as tables directly related to authentication ("session token", "temporary sign up", "suspicious sign up").
 - Only the "code check" table is stored on the client application.
 - Any new login to the application updates the expiration date of the session token.
 
@@ -41,9 +41,15 @@ cd your-project
 
 ![components](docs/img/components.png)
 
-[delivery-service-csharp](https://github.com/alexeysp11/delivery-service-csharp) could be considered as an example of using the authentication service:
+As an example of an external system that uses this authentication service, you can consider the project [delivery-service-csharp](https://github.com/alexeysp11/delivery-service-csharp):
 
 ![authentication](https://github.com/alexeysp11/delivery-service-csharp/raw/main/docs/img/authentication.png)
+
+### Using as a library 
+
+The [ChatCsharp](https://github.com/alexeysp11/ChatCsharp) project uses this authentication service as a library:
+
+![AuthService](https://github.com/alexeysp11/ChatCsharp/raw/main/Docs/img/AuthService.png)
 
 ## How to improve this project 
 

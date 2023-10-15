@@ -40,9 +40,15 @@ cd your-project
 
 ![components](docs/img/components.png)
 
-В качестве примера внешней системы, которая использует данный сервис аутентификации, можно рассмотреть [delivery-service-csharp](https://github.com/alexeysp11/delivery-service-csharp):
+В качестве примера внешней системы, которая использует данный сервис аутентификации, можно рассмотреть проект [delivery-service-csharp](https://github.com/alexeysp11/delivery-service-csharp):
 
 ![authentication](https://github.com/alexeysp11/delivery-service-csharp/raw/main/docs/img/authentication.png)
+
+### Использование в качестве библиотеки 
+
+Проект [ChatCsharp](https://github.com/alexeysp11/ChatCsharp) использует данный сервис аутентификации в качестве библиотеки: 
+
+![AuthService](https://github.com/alexeysp11/ChatCsharp/raw/main/Docs/img/AuthService.png)
 
 ## Как можно улучшить данный проект
 
