@@ -11,7 +11,7 @@ namespace WokflowLib.Authentication.AuthBL;
 /// <summary>
 /// Class that processes authentication requests.
 /// </summary>
-public class AuthResolver
+public class AuthResolver : IAuthResolver
 {
     private CheckUCConfig CheckUCConfig { get; set; }
 

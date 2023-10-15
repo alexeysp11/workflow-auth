@@ -1,19 +1,21 @@
-# AuthResolver Class 
+# AuthResolverDB Class 
 
 Namespace: [WokflowLib.Authentication.AuthBL](WokflowLib.Authentication.AuthBL.md)
 
 Implement: [IAuthResolver](IAuthResolver.md)
 
-Class that processes authentication requests.
+Inherits: [AuthResolver](AuthResolver.md)
+
+Class that processes authentication requests and interacts with the DB directly.
 
 ## Constructors 
 
-### AuthResolver()
+### AuthResolverDB()
 
 Default constructor.
 
 ```C#
-public AuthResolver();
+public AuthResolverDB();
 ```
 
 ## Methods 
