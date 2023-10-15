@@ -12,9 +12,7 @@ Read this in other languages: [English](README.md), [Russian/Русский](REA
 - Only the "code check" table is stored on the client application.
 - Any new login to the application updates the expiration date of the session token.
 
-## Architecture
-
-![components](docs/img/components.png)
+More detailed description of the service is presented at [this link](docs/description.md).
 
 ## Technologies
 
@@ -26,10 +24,27 @@ Read this in other languages: [English](README.md), [Russian/Русский](REA
 
 ## How to use
 
+This service can be used in two main ways:
+- as a **component of microservice architecture**,
+- as a **library**.
+
+In order to get this library, execute the following operations on the command line:
+```
+cd C:\PathToProj\your-project
+cd ..
+git clone https://github.com/alexeysp11/workflow-lib.git
+git clone https://github.com/alexeysp11/workflow-auth.git
+cd your-project
+```
+
+### Using as a microservice
+
+![components](docs/img/components.png)
+
 [delivery-service-csharp](https://github.com/alexeysp11/delivery-service-csharp) could be considered as an example of using the authentication service:
 
 ![authentication](https://github.com/alexeysp11/delivery-service-csharp/raw/main/docs/img/authentication.png)
 
-## Useful links for developers
+## How to improve this project 
 
-- [Description of the service](docs/description.md).
+- [TODO](docs/TODO.md)
