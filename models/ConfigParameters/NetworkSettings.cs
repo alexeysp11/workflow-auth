@@ -6,7 +6,7 @@ namespace WokflowLib.Authentication.Models.ConfigParameters;
 public class NetworkSettings
 {
     /// <summary>
-    /// 
+    /// Name of the server.
     /// </summary>
     public string ServerName { get; set; }
 }

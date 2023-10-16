@@ -1,7 +1,7 @@
 namespace WokflowLib.Authentication.Models.ConfigParameters;
 
 /// <summary>
-/// Checking user credentials config parameters.
+/// Config properties that is used for checking if the user credentials were filled properly.
 /// </summary>
 public class CheckUCConfig
 {

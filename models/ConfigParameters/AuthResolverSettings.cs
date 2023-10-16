@@ -1,12 +1,12 @@
 namespace WokflowLib.Authentication.Models.ConfigParameters;
 
 /// <summary>
-/// 
+/// Settings for authentication resolver.
 /// </summary>
 public class AuthResolverSettings
 {
     /// <summary>
-    /// Checking user credentials config parameters.
+    /// Config properties that is used for checking if the user credentials were filled properly.
     /// </summary>
     public CheckUCConfig CheckUCConfig { get; set; }
 

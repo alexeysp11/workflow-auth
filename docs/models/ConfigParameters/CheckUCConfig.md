@@ -2,7 +2,7 @@
 
 Namespace: [WokflowLib.Authentication.Models.ConfigParameters](WokflowLib.Authentication.Models.ConfigParameters.md)
 
-Checking user credentials config parameters.
+Config properties that is used for checking if the user credentials were filled properly.
 
 ## Constructors 
 
