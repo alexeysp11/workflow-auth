@@ -30,6 +30,14 @@ public class AuthResolver : IAuthResolver
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    public AuthResolver(AuthResolverSettings authResolverSettings)
+    {
+        AuthResolverSettings = authResolverSettings;
+    }
+
+    /// <summary>
     /// Method that checks if the specified user exists in the database.
     /// </summary>
     public virtual UserExistance CheckUserExistance(UserCredentials request)

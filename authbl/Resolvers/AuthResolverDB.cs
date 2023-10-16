@@ -30,6 +30,15 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    public AuthResolverDB(AuthResolverSettings authResolverSettings)
+    {
+        AuthResolverSettings = authResolverSettings;
+        DbConnection = new PgDbConnection(AuthResolverSettings.AuthDBSettings.ConnectionString);
+    }
+
+    /// <summary>
     /// Method that creates the specified user.
     /// </summary>
     public override UserCreationResult AddUser(UserCredentials request)

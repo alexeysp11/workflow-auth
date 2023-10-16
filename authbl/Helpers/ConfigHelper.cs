@@ -8,24 +8,35 @@ public static class ConfigHelper
     /// <summary>
     /// Get policies for checking user credentials, from the config file.
     /// </summary>
-    public static CheckUCConfig GetUCConfigs()
+    public static CheckUCConfig GetUCConfigs(
+        bool isLoginRequired = true, 
+        bool isEmailRequired = false, 
+        bool isPhoneNumberRequired = false, 
+        bool isPasswordRequired = true)
     {
+        // 
         return new CheckUCConfig()
         {
-            IsLoginRequired = true,
-            IsEmailRequired = false,
-            IsPhoneNumberRequired = false,
-            IsPasswordRequired = true
+            IsLoginRequired = isLoginRequired,
+            IsEmailRequired = isEmailRequired,
+            IsPhoneNumberRequired = isPhoneNumberRequired,
+            IsPasswordRequired = isPasswordRequired
         };
     }
 
     /// <summary>
     /// Get authentiacation DB settings.
     /// </summary>
-    public static AuthDBSettings GetAuthDBSettings(string dbProvider = "", string connectionString = "", 
-        string usersTableName = "users", string loginColName = "login",
-        string emailColName = "email", string phoneColName = "phone_number", string pswdColName = "password")
+    public static AuthDBSettings GetAuthDBSettings(
+        string dbProvider = "", 
+        string connectionString = "", 
+        string usersTableName = "users", 
+        string loginColName = "login",
+        string emailColName = "email", 
+        string phoneColName = "phone_number", 
+        string pswdColName = "password")
     {
+        // 
         if (string.IsNullOrWhiteSpace(dbProvider))
             dbProvider = "postgres";
         if (string.IsNullOrWhiteSpace(connectionString))
