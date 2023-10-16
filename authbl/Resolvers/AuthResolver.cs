@@ -32,7 +32,7 @@ public class AuthResolver : IAuthResolver
     /// <summary>
     /// Method that checks if the specified user exists in the database.
     /// </summary>
-    public UserExistance CheckUserExistance(UserCredentials request)
+    public virtual UserExistance CheckUserExistance(UserCredentials request)
     {
         var response = new UserExistance();
         try
@@ -61,7 +61,7 @@ public class AuthResolver : IAuthResolver
     /// <summary>
     /// Method that creates the specified user.
     /// </summary>
-    public UserCreationResult AddUser(UserCredentials request)
+    public virtual UserCreationResult AddUser(UserCredentials request)
     {
         var response = new UserCreationResult();
         try
@@ -102,7 +102,7 @@ public class AuthResolver : IAuthResolver
     /// <summary>
     /// Method for verification of sign up completion.
     /// </summary>
-    public VSUResponse VerifySignUp(VSURequest request)
+    public virtual VSUResponse VerifySignUp(VSURequest request)
     {
         var response = new VSUResponse();
         try
@@ -127,7 +127,7 @@ public class AuthResolver : IAuthResolver
     /// <summary>
     /// Method for user verification.
     /// </summary>
-    public VUCResponse VerifyUserCredentials(UserCredentials request)
+    public virtual VUCResponse VerifyUserCredentials(UserCredentials request)
     {
         var response = new VUCResponse();
         try
@@ -158,7 +158,7 @@ public class AuthResolver : IAuthResolver
     /// <summary>
     /// Method for getting and/or updating the session token by user UID.
     /// </summary>
-    public SessionToken GetTokenByUserUid(TokenRequest request)
+    public virtual SessionToken GetTokenByUserUid(TokenRequest request)
     {
         var response = new SessionToken();
         try

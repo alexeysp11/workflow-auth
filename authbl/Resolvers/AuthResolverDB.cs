@@ -12,7 +12,7 @@ namespace WokflowLib.Authentication.AuthBL;
 public class AuthResolverDB : AuthResolver, IAuthResolver
 {
     /// <summary>
-    /// 
+    /// Object for establishing database connection.
     /// </summary>
     private ICommonDbConnection DbConnection { get; }
 
@@ -32,7 +32,7 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
     /// <summary>
     /// Method that creates the specified user.
     /// </summary>
-    public UserCreationResult AddUser(UserCredentials request)
+    public override UserCreationResult AddUser(UserCredentials request)
     {
         var response = new UserCreationResult();
         try
@@ -68,7 +68,7 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
     /// <summary>
     /// Method for user verification.
     /// </summary>
-    public VUCResponse VerifyUserCredentials(UserCredentials request)
+    public override VUCResponse VerifyUserCredentials(UserCredentials request)
     {
         var response = new VUCResponse();
         try
@@ -83,6 +83,7 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
             string sqlRequest = string.Format(AuthResolverSettings.AuthDBSettings.VerifyUserCredentialsSQL, 
                 request.Login, request.Password);
             var dataTable = DbConnection.ExecuteSqlCommand(sqlRequest);
+            response.IsVerified = int.TryParse(dataTable.Rows[0][0].ToString(), out int qty) && qty == 1;
         }
         catch (System.Exception ex)
         {
