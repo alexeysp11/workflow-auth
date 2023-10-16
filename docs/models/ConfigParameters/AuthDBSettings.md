@@ -1,4 +1,4 @@
-# DBSettings Class 
+# AuthDBSettings Class 
 
 Namespace: [WokflowLib.Authentication.Models.ConfigParameters](WokflowLib.Authentication.Models.ConfigParameters.md)
 
@@ -6,12 +6,12 @@ Settings for DB.
 
 ## Constructors 
 
-### DBSettings()
+### AuthDBSettings()
 
 Default constructor.
 
 ```C#
-public DBSettings();
+public AuthDBSettings();
 ```
 
 ## Properties

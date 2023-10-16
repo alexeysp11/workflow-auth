@@ -4,5 +4,5 @@
 
 - [AuthResolverSettings](AuthResolverSettings.md).
 - [CheckUCConfig](CheckUCConfig.md).
-- [DBSettings](DBSettings.md).
+- [AuthDBSettings](AuthDBSettings.md).
 - [NetworkSettings](NetworkSettings.md).

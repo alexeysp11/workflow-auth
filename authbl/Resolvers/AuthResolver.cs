@@ -13,14 +13,20 @@ namespace WokflowLib.Authentication.AuthBL;
 /// </summary>
 public class AuthResolver : IAuthResolver
 {
-    private CheckUCConfig CheckUCConfig { get; set; }
+    /// <summary>
+    /// Settings for authentication resolver.
+    /// </summary>
+    protected AuthResolverSettings AuthResolverSettings { get; set; }
 
     /// <summary>
     /// Default constructor.
     /// </summary>
     public AuthResolver()
     {
-        CheckUCConfig = ConfigHelper.GetUCConfigs();
+        AuthResolverSettings = new AuthResolverSettings
+        {
+            CheckUCConfig = ConfigHelper.GetUCConfigs()
+        };
     }
 
     /// <summary>
@@ -31,11 +37,11 @@ public class AuthResolver : IAuthResolver
         var response = new UserExistance();
         try
         {
-            if (CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
+            if (AuthResolverSettings.CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
                 throw new System.Exception("Parameter 'Login' could not be null or empty");
-            if (CheckUCConfig.IsEmailRequired && string.IsNullOrWhiteSpace(request.Email))
+            if (AuthResolverSettings.CheckUCConfig.IsEmailRequired && string.IsNullOrWhiteSpace(request.Email))
                 throw new System.Exception("Parameter 'Email' could not be null or empty");
-            if (CheckUCConfig.IsPhoneNumberRequired && string.IsNullOrWhiteSpace(request.PhoneNumber))
+            if (AuthResolverSettings.CheckUCConfig.IsPhoneNumberRequired && string.IsNullOrWhiteSpace(request.PhoneNumber))
                 throw new System.Exception("Parameter 'PhoneNumber' could not be null or empty"); 
             // 
             new UserResolver().CheckUserExistance(request, response);
@@ -60,13 +66,13 @@ public class AuthResolver : IAuthResolver
         var response = new UserCreationResult();
         try
         {
-            if (CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
+            if (AuthResolverSettings.CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
                 throw new System.Exception("Parameter 'Login' could not be null or empty");
-            if (CheckUCConfig.IsEmailRequired && string.IsNullOrWhiteSpace(request.Email))
+            if (AuthResolverSettings.CheckUCConfig.IsEmailRequired && string.IsNullOrWhiteSpace(request.Email))
                 throw new System.Exception("Parameter 'Email' could not be null or empty");
-            if (CheckUCConfig.IsPhoneNumberRequired && string.IsNullOrWhiteSpace(request.PhoneNumber))
+            if (AuthResolverSettings.CheckUCConfig.IsPhoneNumberRequired && string.IsNullOrWhiteSpace(request.PhoneNumber))
                 throw new System.Exception("Parameter 'PhoneNumber' could not be null or empty");
-            if (CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
+            if (AuthResolverSettings.CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
                 throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
             ApiOperation httpResponse = new ApiOperation();
@@ -126,9 +132,9 @@ public class AuthResolver : IAuthResolver
         var response = new VUCResponse();
         try
         {
-            if (CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
+            if (AuthResolverSettings.CheckUCConfig.IsLoginRequired && string.IsNullOrWhiteSpace(request.Login))
                 throw new System.Exception("Parameter 'Login' could not be null or empty");
-            if (CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
+            if (AuthResolverSettings.CheckUCConfig.IsPasswordRequired && string.IsNullOrWhiteSpace(request.Password))
                 throw new System.Exception("Parameter 'Password' could not be null or empty");
             // 
             var responseStr = new HttpSender().Send("https://localhost:7251/Auth/VerifyUserCredentials", request);

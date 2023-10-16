@@ -30,17 +30,17 @@ public CheckUCConfig CheckUCConfig { get; set; }
 
 Config properties that is used for checking if the user credentials were filled properly.
 
-### DBSettings
+### AuthDBSettings
 
 Settings for DB.
 
 ```C#
-public DBSettings DBSettings { get; set; }
+public AuthDBSettings AuthDBSettings { get; set; }
 ```
 
 #### Property Value
 
-[DBSettings](DBSettings.md)
+[AuthDBSettings](AuthDBSettings.md)
 
 Settings for DB.
 

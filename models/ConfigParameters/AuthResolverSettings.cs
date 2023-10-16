@@ -13,7 +13,7 @@ public class AuthResolverSettings
     /// <summary>
     /// Settings for DB.
     /// </summary>
-    public DBSettings DBSettings { get; set; }
+    public AuthDBSettings AuthDBSettings { get; set; }
 
     /// <summary>
     /// Settings for network communication.
