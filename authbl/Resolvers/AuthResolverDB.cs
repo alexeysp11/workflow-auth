@@ -14,7 +14,7 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
     /// <summary>
     /// 
     /// </summary>
-    private PgDbConnection PgDbConnection { get; }
+    private ICommonDbConnection DbConnection { get; }
 
     /// <summary>
     /// Default constructor.
@@ -26,7 +26,7 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
             CheckUCConfig = ConfigHelper.GetUCConfigs(),
             AuthDBSettings = ConfigHelper.GetAuthDBSettings()
         };
-        PgDbConnection = new PgDbConnection(AuthResolverSettings.AuthDBSettings.ConnectionString);
+        DbConnection = new PgDbConnection(AuthResolverSettings.AuthDBSettings.ConnectionString);
     }
 
     /// <summary>
@@ -50,7 +50,7 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
             // 
             string sqlRequest = string.Format(AuthResolverSettings.AuthDBSettings.AddUserSQL, 
                 request.Login, request.Email, request.PhoneNumber, request.Password);
-            PgDbConnection.ExecuteSqlCommand(sqlRequest);
+            DbConnection.ExecuteSqlCommand(sqlRequest);
         }
         catch (System.Exception ex)
         {
@@ -82,7 +82,7 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
             // 
             string sqlRequest = string.Format(AuthResolverSettings.AuthDBSettings.VerifyUserCredentialsSQL, 
                 request.Login, request.Password);
-            var dataTable = PgDbConnection.ExecuteSqlCommand(sqlRequest);
+            var dataTable = DbConnection.ExecuteSqlCommand(sqlRequest);
         }
         catch (System.Exception ex)
         {
