@@ -3,12 +3,12 @@ using WokflowLib.Authentication.Models.ConfigParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
-public static class ConfigHelper
+public class ConfigHelper
 {
     /// <summary>
     /// Get policies for checking user credentials, from the config file.
     /// </summary>
-    public static CheckUCConfig GetUCConfigs(
+    public CheckUCConfig GetUCConfigs(
         bool isLoginRequired = true, 
         bool isEmailRequired = false, 
         bool isPhoneNumberRequired = false, 
@@ -27,7 +27,7 @@ public static class ConfigHelper
     /// <summary>
     /// Get authentiacation DB settings.
     /// </summary>
-    public static AuthDBSettings GetAuthDBSettings(
+    public AuthDBSettings GetAuthDBSettings(
         string dbProvider = "", 
         string connectionString = "", 
         string usersTableName = "users", 

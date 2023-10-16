@@ -21,10 +21,11 @@ public class AuthResolverDB : AuthResolver, IAuthResolver
     /// </summary>
     public AuthResolverDB()
     {
+        var configHelper = new ConfigHelper();
         AuthResolverSettings = new AuthResolverSettings
         {
-            CheckUCConfig = ConfigHelper.GetUCConfigs(),
-            AuthDBSettings = ConfigHelper.GetAuthDBSettings()
+            CheckUCConfig = configHelper.GetUCConfigs(),
+            AuthDBSettings = configHelper.GetAuthDBSettings()
         };
         DbConnection = new PgDbConnection(AuthResolverSettings.AuthDBSettings.ConnectionString);
     }

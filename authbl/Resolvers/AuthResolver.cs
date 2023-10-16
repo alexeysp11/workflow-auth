@@ -25,7 +25,7 @@ public class AuthResolver : IAuthResolver
     {
         AuthResolverSettings = new AuthResolverSettings
         {
-            CheckUCConfig = ConfigHelper.GetUCConfigs()
+            CheckUCConfig = new ConfigHelper().GetUCConfigs()
         };
     }
 
