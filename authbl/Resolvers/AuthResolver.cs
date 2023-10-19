@@ -1,6 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Cims.WorkflowLib.NetworkApis;
+using Cims.WorkflowLib.NetworkAPIs;
 using Cims.WorkflowLib.Models.ErrorHandling;
 using Cims.WorkflowLib.Models.Network;
 using WokflowLib.Authentication.Models.ConfigParameters;
