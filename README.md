@@ -4,6 +4,9 @@ Read this in other languages: [English](README.md), [Russian/Русский](REA
 
 `workflow-auth` is a service for authentication and getting session tokens.
 
+The authentication service is responsible for verifying the identity of users attempting to access the client app. 
+This includes validating user credentials, such as email address and password, and providing secure access to the app's features and functionality.
+
 ## Description
 
 - This service writes/reads session tokens in the database.
