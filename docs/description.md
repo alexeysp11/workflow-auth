@@ -1,6 +1,6 @@
 # description
 
-Read this in other languages: [English](description.md), [Russian/Русский](description.ru.md).
+[English](description.md) | [Русский](description.ru.md)
 
 ## Step-by-step description of how the client application and service work
 

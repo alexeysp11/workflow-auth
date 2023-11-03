@@ -1,6 +1,6 @@
 # description
 
-Доступно на других языках: [English/Английский](description.md), [Russian/Русский](description.ru.md).
+[English](description.md) | [Русский](description.ru.md)
 
 ## Пошаговое описание работы клиентского приложения и сервиса 
 

@@ -1,6 +1,6 @@
 # workflow-auth
 
-Доступно на других языках: [English/Английский](README.md), [Russian/Русский](README.ru.md).
+[English](README.md) | [Русский](README.ru.md)
 
 `workflow-auth` - это сервис аутентификации и выдачи сессионных токенов. 
 
