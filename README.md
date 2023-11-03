@@ -9,6 +9,8 @@ This includes validating user credentials, such as email address and password, a
 
 ## Description
 
+The main functions of this authentication service include the following:
+
 - This service writes/reads session tokens in the database.
 - PostgreSQL is used as a database.
 - In order to reduce the risk of compromise of personal data, the service does not store any data associated with users: only user GUIDs, as well as tables directly related to authentication ("session token", "temporary sign up", "suspicious sign up").
@@ -16,6 +18,22 @@ This includes validating user credentials, such as email address and password, a
 - Any new login to the application updates the expiration date of the session token.
 
 More detailed description of the service is presented at [this link](docs/description.md).
+
+### Goals 
+
+The goals of the project are to provide a service for authentication and session token management, allowing users to securely access the client app's features and functionality.
+
+### Scope 
+
+The scope of the project is focused on providing a specific service for authentication and session token management, rather than a comprehensive library of functionalities.
+
+### Who can use this library
+
+The intended users of the application are developers working on client apps that require authentication and session token management. Companies in a variety of industries could benefit from using this application, particularly those that handle sensitive user data or require secure access to their services.
+
+### What projects this library could be used in
+
+This library could be used in a variety of client app projects that require authentication and session token management, such as e-commerce platforms, social media apps, and financial services apps.
 
 ## Technologies
 
