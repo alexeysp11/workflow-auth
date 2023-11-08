@@ -9,6 +9,9 @@ using TokenRequestCommon = WokflowLib.Authentication.Models.NetworkParameters.To
 
 namespace WokflowLib.Authentication.AuthGrpcApi.Services;
 
+/// <summary>
+/// Authentication service that is implemented as a gRPC service.
+/// </summary>
 public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGrpcApi.AuthGrpcApiBase
 {
     private readonly ILogger<AuthGrpcApiService> _logger;
@@ -18,7 +21,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     }
 
     /// <summary>
-    /// 
+    /// Method to check if a user exists in the database.
     /// </summary>
     public override Task<UserExistance> CheckUserExistance(UserCredentials request, ServerCallContext context)
     {
@@ -38,7 +41,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     }
 
     /// <summary>
-    /// 
+    /// Method for adding a user to the database.
     /// </summary>
     public override Task<UserCreationResult> AddUser(UserCredentials request, ServerCallContext context)
     {
@@ -59,7 +62,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     }
 
     /// <summary>
-    /// 
+    /// Method for verifying user sign up in an application.
     /// </summary>
     public override Task<VSUResponse> VerifySignUp(VSURequest request, ServerCallContext context)
     {
@@ -78,7 +81,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     }
 
     /// <summary>
-    /// 
+    /// Method for verifying user credentials.
     /// </summary>
     public override Task<VUCResponse> VerifyUserCredentials(UserCredentials request, ServerCallContext context)
     {
@@ -97,7 +100,7 @@ public class AuthGrpcApiService : WokflowLib.Authentication.Models.Protos.AuthGr
     }
 
     /// <summary>
-    /// 
+    /// Method for obtaining a token by user GUID.
     /// </summary>
     public override Task<SessionToken> GetTokenByUserUid(TokenRequest request, ServerCallContext context)
     {

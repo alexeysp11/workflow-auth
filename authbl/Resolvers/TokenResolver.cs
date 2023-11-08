@@ -6,12 +6,27 @@ using WokflowLib.Authentication.Models.NetworkParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
+/// <summary>
+/// The class that resolves tokens.
+/// </summary>
 public class TokenResolver
 {
+    /// <summary>
+    /// Database connection object.
+    /// </summary>
     private PgDbConnection PgDbConnection { get; }
+    /// <summary>
+    /// Connection string for using a database.
+    /// </summary>
     private string ConnectionString { get; }
+    /// <summary>
+    /// Number of hours during which the token will be valid.
+    /// </summary>
     private int HoursToAdd { get; }
 
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
     public TokenResolver()
     {
         ConnectionString = "Server=127.0.0.1;Port=5432;Userid=postgres;Password=postgres;Database=postgres";
@@ -20,7 +35,7 @@ public class TokenResolver
     }
 
     /// <summary>
-    /// 
+    /// Method for creating a token and saving it in the database.
     /// </summary>
     public void CreateToken(SessionToken response)
     {
@@ -44,7 +59,7 @@ values ('{response.TokenGuid}','{response.TokenBeginDt}','{response.TokenEndDt}'
         }
     }
     /// <summary>
-    /// 
+    /// Method for obtaining a token by user GUID.
     /// </summary>
     public void GetTokenByGuid(System.Guid guid)
     {

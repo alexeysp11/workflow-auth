@@ -6,11 +6,23 @@ using WokflowLib.Authentication.Models.NetworkParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
+/// <summary>
+/// The class that resolves users.
+/// </summary>
 public class UserResolver
 {
+    /// <summary>
+    /// Database connection object.
+    /// </summary>
     private PgDbConnection PgDbConnection { get; }
+    /// <summary>
+    /// Connection string for using a database.
+    /// </summary>
     private string ConnectionString { get; }
 
+    /// <summary>
+    /// Default constructor.
+    /// </summary>
     public UserResolver()
     {
         ConnectionString = "Server=127.0.0.1;Port=5432;Userid=postgres;Password=postgres;Database=postgres";

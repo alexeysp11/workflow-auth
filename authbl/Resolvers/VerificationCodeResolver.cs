@@ -6,10 +6,13 @@ using WokflowLib.Authentication.Models.NetworkParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
+/// <summary>
+/// The class that resolves verification code.
+/// </summary>
 public class VerificationCodeResolver
 {
     /// <summary>
-    /// 
+    /// Method for generating verification code.
     /// </summary>
     public void GenerateVerificationCode(UserCreationResult response)
     {

@@ -3,6 +3,9 @@ using WokflowLib.Authentication.Models.ConfigParameters;
 
 namespace WokflowLib.Authentication.AuthBL;
 
+/// <summary>
+/// The class that helps to use configs.
+/// </summary>
 public class ConfigHelper
 {
     /// <summary>
