@@ -54,6 +54,6 @@ public WorkflowException? WorkflowException { get; set; }
 
 #### Property Value
 
-[WorkflowException](https://github.com/alexeysp11/workflow-lib/blob/main/docs/Models/ErrorHandling/WorkflowException.md)
+[WorkflowException](https://github.com/alexeysp11/workflow-lib/blob/main/src/Models/ErrorHandling/WorkflowException.cs)
 
 Workflow exception.
